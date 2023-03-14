@@ -3,14 +3,21 @@ package ucv.ro.catalina.movie.model;
 import java.time.Duration;
 import java.util.List;
 
-public class Film {
+public class Movie {
     private int id;
     private String name;
     private String description;
     private List<Actor> actors;
     private Duration duration;
-    private Schedule schedule;
     private int rating;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     public int getId() {
         return id;

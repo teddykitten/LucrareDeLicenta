@@ -7,7 +7,7 @@ public class User {
     private String username;
     private String email;
     private char[] password;
-    private List<Film> bookedFilms;
+    private List<Movie> bookedMovies;
     private List<Comment> comments;
 
     public List<Comment> getComments() {
@@ -18,12 +18,12 @@ public class User {
         this.comments = comments;
     }
 
-    public List<Film> getBookedFilms() {
-        return bookedFilms;
+    public List<Movie> getBookedFilms() {
+        return bookedMovies;
     }
 
-    public void setBookedFilms(List<Film> bookedFilms) {
-        this.bookedFilms = bookedFilms;
+    public void setBookedFilms(List<Movie> bookedMovies) {
+        this.bookedMovies = bookedMovies;
     }
 
     public int getId() {
