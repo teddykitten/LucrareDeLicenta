@@ -1,9 +1,13 @@
 package ucv.ro.catalina.movie.model;
 
+import java.time.LocalDateTime;
+
 public class Comment {
     private int id;
     private User user; //(?)
     private String content;
+    private Film movie;
+    private LocalDateTime postTime;
 
     public int getId() {
         return id;
