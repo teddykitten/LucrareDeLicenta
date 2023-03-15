@@ -1,18 +1,26 @@
 package ucv.ro.catalina.movie.model;
 
 public class Hall {
-    private int hallNumber;
-    
-    //TODO insert a name
+    private int id;
+
+    private String name;
 
     private Seat numberOfSeats;
 
-    public int getHallNumber() {
-        return hallNumber;
+    public String getName() {
+        return name;
     }
 
-    public void setHallNumber(int hallNumber) {
-        this.hallNumber = hallNumber;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Seat getNumberOfSeats() {
