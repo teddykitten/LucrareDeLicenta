@@ -2,6 +2,9 @@ package ucv.ro.catalina.movie.model;
 
 public class Hall {
     private int hallNumber;
+    
+    //TODO insert a name
+
     private Seat numberOfSeats;
 
     public int getHallNumber() {
