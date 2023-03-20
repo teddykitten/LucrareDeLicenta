@@ -1,4 +1,4 @@
-package ucv.ro.catalina.movie.model;
+package ucv.ro.catalina.ilie.licenta.model;
 
 import java.util.List;
 

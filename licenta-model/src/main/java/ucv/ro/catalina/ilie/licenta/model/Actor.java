@@ -1,4 +1,4 @@
-package ucv.ro.catalina.movie.model;
+package ucv.ro.catalina.ilie.licenta.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
