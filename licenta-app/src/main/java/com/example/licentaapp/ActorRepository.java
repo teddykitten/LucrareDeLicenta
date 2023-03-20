@@ -1,4 +1,4 @@
-package ucv.ro.catalina.accesingdatasql;
+package com.example.licentaapp;
 
 
 import org.springframework.data.repository.CrudRepository;

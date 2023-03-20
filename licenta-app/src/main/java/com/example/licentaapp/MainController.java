@@ -1,4 +1,4 @@
-package ucv.ro.catalina.accesingdatasql;
+package com.example.licentaapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
