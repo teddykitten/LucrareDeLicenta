@@ -1,4 +1,4 @@
-package com.example.licentaapp;
+package com.example.licentaapp.repository;
 
 
 import org.springframework.data.repository.CrudRepository;
