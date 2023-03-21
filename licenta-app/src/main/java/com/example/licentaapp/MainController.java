@@ -12,7 +12,7 @@ public class MainController {
     @Autowired
     private ActorRepository actorRepository;
 
-    @PostMapping(path = " /add")
+    @PostMapping(path = "/add")
     public @ResponseBody String addNewActor(@RequestParam String name) {
         Actor actor = new Actor();
         actor.setName(name);
