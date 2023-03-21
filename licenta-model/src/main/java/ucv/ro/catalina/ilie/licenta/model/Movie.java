@@ -1,12 +1,21 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 import java.time.Duration;
 import java.util.List;
 
+@Entity
 public class Movie {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String description;
+    @OneToMany(mappedBy = "id")
     private List<Actor> actors;
     private Duration duration;
     private int rating;
