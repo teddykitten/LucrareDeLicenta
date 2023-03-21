@@ -1,13 +1,12 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Actor {
     @Id
     @GeneratedValue
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private int id;
     private String name;
 
