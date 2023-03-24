@@ -16,6 +16,8 @@ public class Movie {
 
     private Duration duration;
     private int rating;
+    @OneToMany
+    private Set<Comment> comments;
     @OneToMany(mappedBy = "movie")
     private Set<MovieActor> principalActors;
 
@@ -50,7 +52,6 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
 
     public Duration getDuration() {

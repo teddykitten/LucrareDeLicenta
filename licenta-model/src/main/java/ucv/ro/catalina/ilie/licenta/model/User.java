@@ -1,28 +1,39 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+import java.util.List;
+import java.util.Set;
+
+@Entity
 public class User {
+    @Id
+    @GeneratedValue
     private int id;
     private String username;
     private String email;
     private char[] password;
-    private List<Movie> bookedMovies;
-    private List<Comment> comments;
+    @OneToMany
+    private Set<Movie> bookedMovies;
+    @OneToMany
+    private Set<Comment> comments;
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Movie> getBookedFilms() {
+    public Set<Movie> getBookedFilms() {
         return bookedMovies;
     }
 
-    public void setBookedFilms(List<Movie> bookedMovies) {
+    public void setBookedFilms(Set<Movie> bookedMovies) {
         this.bookedMovies = bookedMovies;
     }
 
