@@ -1,9 +1,20 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class SeatReserved {
+    @Id
+    @GeneratedValue
     private int id;
+    @ManyToOne
     private Seat seat;
+    @ManyToOne
     private Schedule schedule;
+    @ManyToOne
     private Reservation reservation;
 
     public Reservation getReservation() {

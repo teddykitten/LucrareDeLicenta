@@ -16,8 +16,6 @@ public class Movie {
 
     private Duration duration;
     private int rating;
-    @OneToMany
-    private Set<Comment> comments;
     @OneToMany(mappedBy = "movie")
     private Set<MovieActor> principalActors;
 

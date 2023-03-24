@@ -1,12 +1,28 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+import java.util.Set;
 
-
+@Entity
 public class Schedule {
+    @Id
+    @GeneratedValue
+    private int id;
     private LocalDateTime date;
+    @ManyToOne
     private Hall hall;
+    @ManyToOne
     private Movie movie;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public LocalDateTime getDate() {
         return date;

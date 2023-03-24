@@ -1,8 +1,20 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.Set;
+
+@Entity
 public class Reservation {
+    @Id
+    @GeneratedValue
     private int id;
-    private Schedule schedule;
+
+    @OneToMany
+    private Set<Schedule> schedule;
     private boolean active;
 
     public int getId() {
@@ -13,11 +25,11 @@ public class Reservation {
         this.id = id;
     }
 
-    public Schedule getSchedule() {
+    public Set<Schedule> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(Set<Schedule> schedule) {
         this.schedule = schedule;
     }
 
