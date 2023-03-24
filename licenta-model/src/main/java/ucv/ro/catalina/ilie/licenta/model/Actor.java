@@ -2,19 +2,23 @@ package ucv.ro.catalina.ilie.licenta.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Actor {
     @Id
     @GeneratedValue
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
-    private int id;
+    private Long id;
     private String name;
 
-    public int getId() {
+    @OneToMany(mappedBy = "actor")
+    private Set<MovieActor> principalActors;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,11 +1,21 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.Set;
+
+@Entity
 public class Hall {
+    @Id
+    @GeneratedValue
     private int id;
 
     private String name;
-
-    private Seat numberOfSeats;
+    @OneToMany
+    private Set<Seat> seats;
 
     public String getName() {
         return name;
@@ -23,11 +33,11 @@ public class Hall {
         this.id = id;
     }
 
-    public Seat getNumberOfSeats() {
-        return numberOfSeats;
+    public Set<Seat> getSeats() {
+        return seats;
     }
 
-    public void setNumberOfSeats(Seat numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
     }
 }

@@ -2,6 +2,7 @@ package ucv.ro.catalina.ilie.licenta.model;
 
 import java.time.LocalDateTime;
 
+
 public class Schedule {
     private LocalDateTime date;
     private Hall hall;

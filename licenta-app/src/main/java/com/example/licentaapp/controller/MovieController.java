@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping(path = "/movie")
@@ -19,11 +20,11 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewMovie(@RequestParam String name, @RequestParam String description, @RequestParam List<Actor> actors, @RequestParam Duration duration, @RequestParam int rating) {
+    public @ResponseBody String addNewMovie(@RequestParam String name, @RequestParam String description, @RequestParam Set<Actor> actors, @RequestParam Duration duration, @RequestParam int rating) {
         Movie movie = new Movie();
         movie.setName(name);
         movie.setDescription(description);
-        movie.setActors(actors);
+        //movie.setActors(actors);
         movie.setDuration(duration);
         movie.setRating(rating);
         movieRepository.save(movie);

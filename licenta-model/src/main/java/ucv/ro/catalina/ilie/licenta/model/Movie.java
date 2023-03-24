@@ -1,24 +1,23 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Movie {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "id")
-    private List<Actor> actors;
+
     private Duration duration;
     private int rating;
+    @OneToMany(mappedBy = "movie")
+    private Set<MovieActor> principalActors;
 
     public int getRating() {
         return rating;
@@ -28,11 +27,11 @@ public class Movie {
         this.rating = rating;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,13 +51,7 @@ public class Movie {
         this.description = description;
     }
 
-    public List<Actor> getActors() {
-        return actors;
-    }
 
-    public void setActors(List<Actor> actors) {
-        this.actors = actors;
-    }
 
     public Duration getDuration() {
         return duration;

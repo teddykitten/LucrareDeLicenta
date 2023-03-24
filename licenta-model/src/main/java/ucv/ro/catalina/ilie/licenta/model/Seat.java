@@ -1,9 +1,18 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Seat {
+    @Id
+    @GeneratedValue
     private int id;
-    private int row;
-    private int number;
+    private int seatRow;
+    private int seatNumber;
+    @ManyToOne
     private Hall hall;
 
     public int getId() {
@@ -14,20 +23,20 @@ public class Seat {
         this.id = id;
     }
 
-    public int getRow() {
-        return row;
+    public int getSeatRow() {
+        return seatRow;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setSeatRow(int row) {
+        this.seatRow = row;
     }
 
-    public int getNumber() {
-        return number;
+    public int getSeatNumber() {
+        return seatNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setSeatNumber(int number) {
+        this.seatNumber = number;
     }
 
     public Hall getHall() {
