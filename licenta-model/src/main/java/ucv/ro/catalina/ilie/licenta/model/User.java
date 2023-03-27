@@ -1,9 +1,6 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Set;
@@ -20,6 +17,24 @@ public class User {
     private Set<Movie> bookedMovies;
     @OneToMany
     private Set<Comment> comments;
+    @ManyToMany
+    private Set<Role> roles;
+
+    public Set<Movie> getBookedMovies() {
+        return bookedMovies;
+    }
+
+    public void setBookedMovies(Set<Movie> bookedMovies) {
+        this.bookedMovies = bookedMovies;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Set<Comment> getComments() {
         return comments;
