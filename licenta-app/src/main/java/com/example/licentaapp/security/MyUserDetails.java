@@ -4,14 +4,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ucv.ro.catalina.ilie.licenta.model.Role;
-import ucv.ro.catalina.ilie.licenta.model.User;
+import ucv.ro.catalina.ilie.licenta.model.MyUser;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class MyUserDetails  implements UserDetails {
-    private final User user;
-    public MyUserDetails(User user){
+    private final MyUser user;
+    public MyUserDetails(MyUser user){
         this.user = user;
     }
 

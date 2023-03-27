@@ -2,11 +2,10 @@ package ucv.ro.catalina.ilie.licenta.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User {
+public class MyUser {
     @Id
     @GeneratedValue
     private int id;

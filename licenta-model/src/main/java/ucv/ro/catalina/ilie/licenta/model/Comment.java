@@ -10,7 +10,7 @@ public class Comment {
     @GeneratedValue
     private int id;
     @ManyToOne
-    private User user;
+    private MyUser user;
     private String content;
     @ManyToOne
     private Movie movie;
@@ -24,11 +24,11 @@ public class Comment {
         this.id = id;
     }
 
-    public User getUser() {
+    public MyUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(MyUser user) {
         this.user = user;
     }
 
