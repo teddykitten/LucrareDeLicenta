@@ -1,6 +1,6 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-public class Administrator extends MyUser {
+public class Administrator extends User {
     public void addMovie() {
     }
 

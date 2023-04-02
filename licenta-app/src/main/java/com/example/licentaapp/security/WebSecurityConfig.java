@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-//    @Bean
+    //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests((requests) -> requests
 //                .requestMatchers("/", "/home").permitAll()
@@ -35,25 +35,36 @@ public class WebSecurityConfig {
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/admin/**")
+                .hasRole("ADMIN")
                 .requestMatchers("/login")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .loginPage("/login")
-                .and().logout();
-                return http.build();
+                .loginPage("/login.html")
+                .loginProcessingUrl("/perform_login")
+                .defaultSuccessUrl("/homepage.html", true)
+                .failureUrl("/login.html?error=true")
+                .and().logout()
+                .logoutUrl("/perform_logout");
+        return http.build();
 
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         UserDetails user =
                 User.withUsername("user")
                         .password(passwordEncoder().encode("password"))
                         .roles("USER")
                         .build();
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("adminpass"))
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
