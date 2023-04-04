@@ -26,7 +26,7 @@ public class WebSecurityConfig {
                 .permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .loginPage("/ui/")
+                .loginPage("/login")
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/homepage.html", true)
                 .failureUrl("/login.html?error=true")
