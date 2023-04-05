@@ -2,7 +2,6 @@ package com.example.licentaapp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -17,28 +16,17 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
-//    @Bean
-//    @Order(1)
-//    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .securityMatcher("/admin/**")
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .anyRequest().hasRole("ADMIN")
-//                )
-//                .httpBasic(withDefaults());
-//        return http.build();
-//    }
     @Bean
     public SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/actor/add/**", "/actor/remove/**").hasRole("ADMIN")
+                        .requestMatchers("/actor/all/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults());
         return http.build();
     }
-
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         UserDetails user =
@@ -52,7 +40,6 @@ public class WebSecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
