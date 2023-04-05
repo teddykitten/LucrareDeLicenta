@@ -9,8 +9,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>licenta-model</module>
-        <module>licenta-server</module>
-        <module>licenta-ui</module>
     </modules>
 
     <properties>
