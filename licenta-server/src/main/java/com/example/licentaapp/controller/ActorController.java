@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping(path = "/actor") //This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/actor")
 public class ActorController {
     @Autowired
     private ActorRepository actorRepository;

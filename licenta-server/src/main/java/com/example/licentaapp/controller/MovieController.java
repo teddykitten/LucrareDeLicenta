@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
 import ucv.ro.catalina.ilie.licenta.model.Movie;
+import ucv.ro.catalina.ilie.licenta.model.MovieActor;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -20,11 +21,11 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewMovie(@RequestParam String name, @RequestParam String description, @RequestParam Set<Actor> actors, @RequestParam Duration duration, @RequestParam int rating) {
+    public @ResponseBody String addNewMovie(@RequestParam String name, @RequestParam String description, @RequestParam Set<MovieActor> actors, @RequestParam Duration duration, @RequestParam int rating) {
         Movie movie = new Movie();
         movie.setName(name);
         movie.setDescription(description);
-        //movie.setActors(actors);
+        movie.setActors(actors);
         movie.setDuration(duration);
         movie.setRating(rating);
         movieRepository.save(movie);

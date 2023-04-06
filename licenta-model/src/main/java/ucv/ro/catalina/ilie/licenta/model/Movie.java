@@ -17,7 +17,7 @@ public class Movie {
     private Duration duration;
     private int rating;
     @OneToMany(mappedBy = "movie")
-    private Set<MovieActor> principalActors;
+    private Set<MovieActor> actors;
 
     public int getRating() {
         return rating;
@@ -51,6 +51,13 @@ public class Movie {
         this.description = description;
     }
 
+    public Set<MovieActor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Set<MovieActor> actors) {
+        this.actors = actors;
+    }
 
     public Duration getDuration() {
         return duration;
