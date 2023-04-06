@@ -16,8 +16,6 @@ public class User {
     private Set<Movie> bookedMovies;
     @OneToMany
     private Set<Comment> comments;
-    @ManyToMany
-    private Set<Role> roles;
 
     public Set<Movie> getBookedMovies() {
         return bookedMovies;
@@ -25,14 +23,6 @@ public class User {
 
     public void setBookedMovies(Set<Movie> bookedMovies) {
         this.bookedMovies = bookedMovies;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 
     public Set<Comment> getComments() {
