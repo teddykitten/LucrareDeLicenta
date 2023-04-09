@@ -3,7 +3,6 @@ package ucv.ro.catalina.ilie.licenta.model;
 import jakarta.persistence.*;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Set;
 
 @Entity
