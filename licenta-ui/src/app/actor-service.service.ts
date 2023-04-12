@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-// @ts-ignore
-import {Actor} from '../model/actor';
-// @ts-ignore
-import {Observable} from 'rxjs/Observable';
+
+import {Actor} from './model/actor';
+
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ActorServiceService {

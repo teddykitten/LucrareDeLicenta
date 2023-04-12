@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-// @ts-ignore
+
 import {Actor} from '../model/actor';
 import {ActorServiceService} from "../actor-service.service";
 
