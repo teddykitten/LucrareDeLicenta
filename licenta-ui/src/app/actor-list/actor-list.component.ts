@@ -4,7 +4,7 @@ import {Actor} from '../model/actor';
 import {ActorServiceService} from "../actor-service.service";
 
 @Component({
-  selector: 'app-actor-list',
+  selector: 'actor-list',
   templateUrl: './actor-list.component.html',
   styleUrls: ['./actor-list.component.css']
 })
@@ -16,7 +16,6 @@ export class ActorListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // @ts-ignore
     this.actorService.findAll().subscribe(data => this.actors = data);
   }
 }

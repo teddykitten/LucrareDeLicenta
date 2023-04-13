@@ -1,4 +1,4 @@
 export class Actor {
-  id: string;
+  id: bigint;
   name: string;
 }
