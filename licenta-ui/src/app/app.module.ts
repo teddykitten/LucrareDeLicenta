@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {ActorListComponent} from './actor-list/actor-list.component';
-import {ActorServiceService} from './actor-service.service';
+import {ActorService} from './service/actor-service';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import {ActorServiceService} from './actor-service.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ActorServiceService],
+  providers: [ActorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

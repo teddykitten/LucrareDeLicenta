@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Actor} from './model/actor';
+import {Actor} from '../model/actor';
 import {Observable} from 'rxjs';
 
 @Injectable()
-export class ActorServiceService {
+export class ActorService {
 
   private actorUrl: string;
 
@@ -15,6 +15,7 @@ export class ActorServiceService {
   public findAll(): Observable<Actor[]> {
     return this.http.get<Actor[]>(this.actorUrl);
   }
+
   //
   // public save(actor: Actor) {
   //   return this.http.post<Actor>(this.actorUrl, actor);
