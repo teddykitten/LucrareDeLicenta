@@ -7,6 +7,8 @@ import {AppComponent} from './app.component';
 import {ActorListComponent} from './actor-list/actor-list.component';
 import {ActorService} from './service/actor-service';
 import {LoginComponent} from "./login/login.component";
+import {AuthenticationService} from "./login/authentication-service";
+import {httpInterceptorProviders} from "./login/authguard";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import {LoginComponent} from "./login/login.component";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ActorService],
+  providers: [ActorService, AuthenticationService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
