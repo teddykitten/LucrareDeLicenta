@@ -18,13 +18,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
+                .cors().disable()
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/actor/add/**", "/actor/remove/**").hasRole("ADMIN")
                         .requestMatchers("/actor/all/**").hasRole("USER")
+                        .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults());
+                .formLogin()
+                .defaultSuccessUrl("/ok", true);
         return http.build();
     }
     @Bean
