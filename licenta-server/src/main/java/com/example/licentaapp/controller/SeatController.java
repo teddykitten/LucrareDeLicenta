@@ -13,13 +13,13 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/movie/seat")
+@RequestMapping(path = "/hall/seat")
 public class SeatController {
     @Autowired
     private SeatRepository seatRepository;
 
     @GetMapping(path = "/add")
-    public @ResponseBody String addNewHall(@RequestParam int seatRow, @RequestParam int seatNumber, @RequestParam Hall hall) {
+    public @ResponseBody String addNewSeat(@RequestParam int seatRow, @RequestParam int seatNumber, @RequestParam Hall hall) {
         Seat seat = new Seat();
         seat.setSeatRow(seatRow);
         seat.setSeatNumber(seatNumber);

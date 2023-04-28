@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/movie/hall")
+@RequestMapping(path = "/hall")
 public class HallController {
     @Autowired
     private HallRepository hallRepository;
