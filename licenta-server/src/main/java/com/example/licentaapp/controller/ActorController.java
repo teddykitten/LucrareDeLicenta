@@ -2,33 +2,36 @@ package com.example.licentaapp.controller;
 
 import com.example.licentaapp.repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 @Controller
-@RequestMapping(path = "/actor")
+@RequestMapping(path = "/cinema/actor")
 public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
-    @GetMapping(path = "/add")
-    public @ResponseBody String addNewActor(@RequestParam String name) {
-        Actor actor = new Actor();
-        actor.setName(name);
-        actorRepository.save(actor);
-        return "Saved";
+
+    @PostMapping(path = "/add")
+    public ResponseEntity<Actor> createActor(@RequestBody Actor actor) {
+        try {
+            Actor _actor = actorRepository
+                    .save(actor);
+            return new ResponseEntity<>(_actor, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
     @DeleteMapping(path = "/remove/{id}")
-    public Map<String, Boolean> deleteActor(@PathVariable(value = "id") int id) {
+    public String deleteActor(@PathVariable int id) {
         actorRepository.deleteById(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        return "Actor deleted";
     }
+
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Actor> getAllActors() {
         return actorRepository.findAll();

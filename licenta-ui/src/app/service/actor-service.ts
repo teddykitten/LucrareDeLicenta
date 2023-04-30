@@ -3,21 +3,24 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Actor} from '../model/actor';
 import {Observable} from 'rxjs';
 
-@Injectable()
+const actorUrlList = 'http://localhost:8080/cinema/actor/all';
+const actorUrlAdd = 'http://localhost:8080/cinema/actor/add';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class ActorService {
 
   private actorUrl: string;
 
   constructor(private http: HttpClient) {
-    this.actorUrl = 'http://localhost:8080/actor/all';
   }
 
   public findAll(): Observable<Actor[]> {
-    return this.http.get<Actor[]>(this.actorUrl);
+    return this.http.get<Actor[]>(actorUrlList);
   }
 
-  //
-  // public save(actor: Actor) {
-  //   return this.http.post<Actor>(this.actorUrl, actor);
-  // }
+  create(data: any): Observable<any> {
+    return this.http.post(actorUrlAdd, data);
+  }
 }

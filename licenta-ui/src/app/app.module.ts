@@ -9,12 +9,14 @@ import {ActorService} from './service/actor-service';
 import {LoginComponent} from "./login/login.component";
 import {AuthenticationService} from "./login/authentication-service";
 import {httpInterceptorProviders} from "./login/authguard";
+import {ActorAddComponent} from "./actor-add/actor-add.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ActorListComponent,
-    LoginComponent
+    LoginComponent,
+    ActorAddComponent
   ],
   imports: [
     BrowserModule,

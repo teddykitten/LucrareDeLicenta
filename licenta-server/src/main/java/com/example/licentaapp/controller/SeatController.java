@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/hall/seat")
+@RequestMapping(path = "/cinema/hall/seat")
 public class SeatController {
     @Autowired
     private SeatRepository seatRepository;

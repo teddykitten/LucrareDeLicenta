@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/hall")
+@RequestMapping(path = "/cinema/hall")
 public class HallController {
     @Autowired
     private HallRepository hallRepository;
@@ -25,11 +25,9 @@ public class HallController {
         return "Saved";
     }
     @DeleteMapping(path = "/remove/{id}")
-    public Map<String, Boolean> deleteHall(@PathVariable(value = "id") int id) {
+    public String deleteHall(@PathVariable int id) {
         hallRepository.deleteById(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        return "Hall deleted";
     }
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Hall> getAllHalls() {

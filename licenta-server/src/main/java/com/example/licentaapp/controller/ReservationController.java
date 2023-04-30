@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/movie/reservation")
+@RequestMapping(path = "/cinema/reservation")
 public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;

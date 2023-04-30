@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping(path = "/movie")
+@RequestMapping(path = "/cinema/movie")
 public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
@@ -33,11 +33,9 @@ public class MovieController {
 
 
     @DeleteMapping(path = "/remove/{id}")
-    public Map<String, Boolean> deleteMovie(@PathVariable(value = "id") int id) {
+    public String deleteMovie(@PathVariable int id) {
         movieRepository.deleteById(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        return "Movie deleted";
     }
 
     @GetMapping(path = "/all")
