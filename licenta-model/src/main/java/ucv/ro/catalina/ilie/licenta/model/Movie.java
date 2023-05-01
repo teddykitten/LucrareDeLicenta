@@ -12,11 +12,29 @@ public class Movie {
     private Long id;
     private String name;
     private String description;
+    private int rating;
+    private String genre;
+    private String ageRestricted;
 
     private Duration duration;
-    private int rating;
     @OneToMany(mappedBy = "movie")
     private Set<MovieActor> actors;
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getAgeRestricted() {
+        return ageRestricted;
+    }
+
+    public void setAgeRestricted(String ageRestricted) {
+        this.ageRestricted = ageRestricted;
+    }
 
     public int getRating() {
         return rating;
