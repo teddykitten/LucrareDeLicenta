@@ -3,14 +3,15 @@ package com.example.licentaapp.controller;
 import com.example.licentaapp.repository.HallRepository;
 import com.example.licentaapp.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ucv.ro.catalina.ilie.licenta.model.Hall;
 import ucv.ro.catalina.ilie.licenta.model.Seat;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+
 
 @Controller
 @RequestMapping(path = "/cinema/hall/seat")
@@ -18,14 +19,15 @@ public class SeatController {
     @Autowired
     private SeatRepository seatRepository;
 
-    @GetMapping(path = "/add")
-    public @ResponseBody String addNewSeat(@RequestParam int seatRow, @RequestParam int seatNumber, @RequestParam Hall hall) {
-        Seat seat = new Seat();
-        seat.setSeatRow(seatRow);
-        seat.setSeatNumber(seatNumber);
-        seat.setHall(hall);
-        seatRepository.save(seat);
-        return "Saved";
+    @PostMapping(path = "/add")
+    public ResponseEntity<Seat> createSeat(@RequestBody Seat seat) {
+        try {
+            Seat seat1 = seatRepository
+                    .save(seat);
+            return new ResponseEntity<>(seat1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping(path = "/remove/{id}")

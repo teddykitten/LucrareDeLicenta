@@ -3,15 +3,14 @@ package com.example.licentaapp.controller;
 import com.example.licentaapp.repository.HallRepository;
 import com.example.licentaapp.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ucv.ro.catalina.ilie.licenta.model.Hall;
 import ucv.ro.catalina.ilie.licenta.model.Reservation;
-import ucv.ro.catalina.ilie.licenta.model.Schedule;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping(path = "/cinema/reservation")
@@ -19,12 +18,15 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @GetMapping(path = "/add")
-    public @ResponseBody String addNewReservation(@RequestParam Set<Schedule> schedule) {
-        Reservation reservation = new Reservation();
-        reservation.setSchedule(schedule);
-        reservationRepository.save(reservation);
-        return "Saved";
+    @PostMapping(path = "/add")
+    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+        try {
+            Reservation reservation1 = reservationRepository
+                    .save(reservation);
+            return new ResponseEntity<>(reservation1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping(path = "/remove/{id}")
