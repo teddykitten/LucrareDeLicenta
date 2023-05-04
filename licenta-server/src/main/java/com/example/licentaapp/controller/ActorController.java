@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
 
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping(path = "/cinema/actor")
@@ -26,10 +28,33 @@ public class ActorController {
         }
     }
 
-    @DeleteMapping(path = "/remove/{id}")
-    public String deleteActor(@PathVariable int id) {
-        actorRepository.deleteById(id);
-        return "Actor deleted";
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<HttpStatus> deleteActor(@PathVariable("id") long id) {
+        try {
+            actorRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Actor> updateActor(@PathVariable("id") long id, @RequestBody Actor actor) {
+        Optional<Actor> actorData = actorRepository.findById(id);
+
+        if (actorData.isPresent()) {
+            Actor actor1 = actorData.get();
+            actor1.setName(actor.getName());
+            return new ResponseEntity<>(actorRepository.save(actor1), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/getby/{id}")
+    public ResponseEntity<Actor> getTutorialById(@PathVariable("id") long id) {
+        Optional<Actor> actorData = actorRepository.findById(id);
+        return actorData.map(actor -> new ResponseEntity<>(actor, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping(path = "/all")
