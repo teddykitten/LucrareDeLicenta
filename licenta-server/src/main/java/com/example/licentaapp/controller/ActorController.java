@@ -51,7 +51,7 @@ public class ActorController {
         }
     }
 
-    @GetMapping("/getby/{id}")
+    @GetMapping("/search/{id}")
     public ResponseEntity<Actor> getActorById(@PathVariable("id") long id) {
         Optional<Actor> actorData = actorRepository.findById(id);
         return actorData.map(actor -> new ResponseEntity<>(actor, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
