@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -60,5 +61,18 @@ public class ActorController {
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Actor> getAllActors() {
         return actorRepository.findAll();
+    }
+    @GetMapping("/name")
+    public ResponseEntity<List<Actor>> findByName(@RequestParam String name) {
+        try {
+            List<Actor> tutorials = actorRepository.findByName(name);
+
+            if (tutorials.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(tutorials, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

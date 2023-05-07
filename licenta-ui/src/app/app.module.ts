@@ -10,13 +10,26 @@ import {LoginComponent} from "./login/login.component";
 import {AuthenticationService} from "./login/authentication-service";
 import {httpInterceptorProviders} from "./login/authguard";
 import {ActorAddComponent} from "./actor-add/actor-add.component";
+import {MovieListComponent} from "./movie-list/movie-list.component";
+import {MovieService} from "./service/movie-service";
+import {MovieAddComponent} from "./movie-add/movie-add.component";
+import {HallListComponent} from "./hall-list/hall-list.component";
+import {HallAddComponent} from "./hall-add/hall-add.component";
+import {HallService} from "./service/hall-service";
+import {SeatService} from "./service/seat-service";
+import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ActorListComponent,
     LoginComponent,
-    ActorAddComponent
+    ActorAddComponent,
+    MovieListComponent,
+    MovieAddComponent,
+    HallListComponent,
+    HallAddComponent,
+    ActorDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +38,7 @@ import {ActorAddComponent} from "./actor-add/actor-add.component";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ActorService, AuthenticationService, httpInterceptorProviders],
+  providers: [ActorService, MovieService, AuthenticationService, HallService, SeatService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
