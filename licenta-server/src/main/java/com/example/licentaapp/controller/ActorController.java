@@ -8,17 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 @Controller
-@RequestMapping(path = "/cinema/actor")
+@RequestMapping(path = "/cinema")
 public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/actor")
     public ResponseEntity<Actor> createActor(@RequestBody Actor actor) {
         try {
             Actor _actor = actorRepository
@@ -29,7 +30,7 @@ public class ActorController {
         }
     }
 
-    @DeleteMapping("/remove/{id}")
+    @DeleteMapping("/actor/{id}")
     public ResponseEntity<HttpStatus> deleteActor(@PathVariable("id") long id) {
         try {
             actorRepository.deleteById(id);
@@ -39,7 +40,7 @@ public class ActorController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/actor/{id}")
     public ResponseEntity<Actor> updateActor(@PathVariable("id") long id, @RequestBody Actor actor) {
         Optional<Actor> actorData = actorRepository.findById(id);
 
@@ -52,27 +53,29 @@ public class ActorController {
         }
     }
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/actor/{id}")
     public ResponseEntity<Actor> getActorById(@PathVariable("id") long id) {
         Optional<Actor> actorData = actorRepository.findById(id);
         return actorData.map(actor -> new ResponseEntity<>(actor, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Actor> getAllActors() {
-        return actorRepository.findAll();
-    }
-    @GetMapping("/name")
-    public ResponseEntity<List<Actor>> findByName(@RequestParam String name) {
+    @GetMapping("/actor")
+    public ResponseEntity<List<Actor>> getAllActors(@RequestParam(required = false) String name) {
         try {
-            List<Actor> tutorials = actorRepository.findByName(name);
+            List<Actor> actors = new ArrayList<>();
 
-            if (tutorials.isEmpty()) {
+            if (name == null)
+                actors.addAll(actorRepository.findAll());
+            else
+                actors.addAll(actorRepository.findByName(name));
+
+            if (actors.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(tutorials, HttpStatus.OK);
+
+            return new ResponseEntity<>(actors, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
