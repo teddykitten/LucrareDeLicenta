@@ -59,7 +59,7 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.router.navigate(['/cinema/actor']);
+          this.router.navigate(['/cinema/actor']).then(() =>res.message ? res.message : 'This actor was deleted successfully!' );
         },
         error: (e) => console.error(e)
       });

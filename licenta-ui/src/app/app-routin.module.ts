@@ -11,15 +11,15 @@ import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 
 
 const routes: Routes = [
-  {path: 'actor-list', component: ActorListComponent},
+  {path: '', redirectTo: 'actor', pathMatch: 'full'},
+  {path: 'actor', component: ActorListComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'actor-add', component: ActorAddComponent},
   {path: 'movie-list', component: MovieListComponent},
   {path: 'movie-add', component: MovieAddComponent},
   {path: 'hall-list', component: HallListComponent},
   {path: 'hall-add', component: HallAddComponent},
-  {path: 'actor-details', component: ActorDetailsComponent},
-  {path: 'actor/:id', component: ActorDetailsComponent}
+  {path: 'actor/:id', component: ActorDetailsComponent},
+  {path: 'add', component: ActorAddComponent}
 ];
 
 @NgModule({

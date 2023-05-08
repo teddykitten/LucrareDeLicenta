@@ -22,14 +22,14 @@ import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 @NgModule({
   declarations: [
     AppComponent,
-    ActorListComponent,
     LoginComponent,
     ActorAddComponent,
     MovieListComponent,
     MovieAddComponent,
     HallListComponent,
     HallAddComponent,
-    ActorDetailsComponent
+    ActorDetailsComponent,
+    ActorListComponent
   ],
   imports: [
     BrowserModule,
