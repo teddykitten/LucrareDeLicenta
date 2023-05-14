@@ -6,22 +6,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ucv.ro.catalina.ilie.licenta.model.Actor;
+import ucv.ro.catalina.ilie.licenta.model.Hall;
 import ucv.ro.catalina.ilie.licenta.model.Movie;
-import ucv.ro.catalina.ilie.licenta.model.MovieActor;
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 
 @Controller
-@RequestMapping(path = "/cinema/movie")
+@RequestMapping(path = "/cinema")
 public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/movie")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
         try {
             Movie movie1 = movieRepository
@@ -32,16 +31,52 @@ public class MovieController {
         }
     }
 
-
-    @DeleteMapping(path = "/remove/{id}")
-    public String deleteMovie(@PathVariable int id) {
-        movieRepository.deleteById(id);
-        return "Movie deleted";
+    @DeleteMapping("/movie/{id}")
+    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable("id") long id) {
+        try {
+            movieRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    @PutMapping("/movie/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable("id") long id, @RequestBody Movie movie) {
+        Optional<Movie> movieData = movieRepository.findById(id);
+
+        if (movieData.isPresent()) {
+            Movie movie1 = movieData.get();
+            movie1.setName(movie.getName());
+            return new ResponseEntity<>(movieRepository.save(movie1), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/movie/{id}")
+    public ResponseEntity<Movie> getMovieById(@PathVariable("id") long id) {
+        Optional<Movie> movieData = movieRepository.findById(id);
+        return movieData.map(movie -> new ResponseEntity<>(movie, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/movie")
+    public ResponseEntity<List<Movie>> getAllMovies(@RequestParam(required = false) String name) {
+        try {
+            List<Movie> movies = new ArrayList<>();
+
+            if (name == null)
+                movies.addAll(movieRepository.findAll());
+            else
+                movies.addAll(movieRepository.findByName(name));
+
+            if (movies.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(movies, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
-
