@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ucv.ro.catalina.ilie.licenta.model.Hall;
 import ucv.ro.catalina.ilie.licenta.model.Movie;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class MovieController {
     }
 
     @GetMapping("/movie")
-    public ResponseEntity<List<Movie>> getAllMovies(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<Movie>> getAllMovies(@RequestParam(required = false) String name, @RequestParam(required = false) String genre) {
         try {
             List<Movie> movies = new ArrayList<>();
 
@@ -69,7 +68,11 @@ public class MovieController {
                 movies.addAll(movieRepository.findAll());
             else
                 movies.addAll(movieRepository.findByName(name));
-
+            if (genre == null)
+                movies.addAll(movieRepository.findAll());
+            else {
+                movies.addAll(movieRepository.findByGenre(genre));
+            }
             if (movies.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

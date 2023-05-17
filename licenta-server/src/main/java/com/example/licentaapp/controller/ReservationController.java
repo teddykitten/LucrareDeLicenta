@@ -1,6 +1,5 @@
 package com.example.licentaapp.controller;
 
-import com.example.licentaapp.repository.HallRepository;
 import com.example.licentaapp.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,16 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Reservation;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Optional;
+
 
 @Controller
-@RequestMapping(path = "/cinema/reservation")
+@RequestMapping(path = "/cinema")
 public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/seat")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         try {
             Reservation reservation1 = reservationRepository
@@ -29,16 +29,41 @@ public class ReservationController {
         }
     }
 
-    @DeleteMapping(path = "/remove/{id}")
-    public Map<String, Boolean> deleteReservation(@PathVariable(value = "id") int id) {
-        reservationRepository.deleteById(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+    @DeleteMapping("/seat/{id}")
+    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable("id") long id) {
+        try {
+            reservationRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    @PutMapping("/seat/{id}")
+    public ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
+        Optional<Reservation> reservationData = reservationRepository.findById(id);
+
+        if (reservationData.isPresent()) {
+            Reservation reservation1 = reservationData.get();
+            reservation1.setActive(reservation.isActive());
+            return new ResponseEntity<>(reservationRepository.save(reservation1), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/seat/{id}")
+    public ResponseEntity<Reservation> getReservationById(@PathVariable("id") long id) {
+        Optional<Reservation> reservationData = reservationRepository.findById(id);
+        return reservationData.map(reservation -> new ResponseEntity<>(reservation, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/seat")
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        try {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
