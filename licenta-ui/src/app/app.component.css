@@ -1,0 +1,9 @@
+.add-btn {
+  width: 70px;
+  background-color: darkseagreen;
+  border-radius: 60px;
+  box-shadow: 3px 3px gray;
+  padding: 1px;
+  float: right;
+}
+

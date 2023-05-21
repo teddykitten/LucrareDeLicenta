@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Age restricted</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Actors</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let movie of movies">
+        <td>{{ movie.id }}</td>
+        <td>{{ movie.name }}</td>
+        <td>{{ movie.description }}</td>
+        <td>{{ movie.rating }}</td>
+        <td>{{ movie.genre }}</td>
+        <td>{{ movie.ageRestricted }}</td>
+        <td>{{ movie.duration }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

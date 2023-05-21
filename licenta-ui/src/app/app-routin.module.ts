@@ -11,14 +11,14 @@ import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'actor', pathMatch: 'full'},
+  {path: '', redirectTo: '', pathMatch: 'full'},
   {path: 'actor', component: ActorListComponent},
+  {path: 'actor/:id', component: ActorDetailsComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'movie-list', component: MovieListComponent},
+  {path: 'movie', component: MovieListComponent},
   {path: 'movie-add', component: MovieAddComponent},
   {path: 'hall-list', component: HallListComponent},
   {path: 'hall-add', component: HallAddComponent},
-  {path: 'actor/:id', component: ActorDetailsComponent},
   {path: 'add', component: ActorAddComponent}
 ];
 

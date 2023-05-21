@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Actor} from "../model/actor";
+import {Movie} from "../model/actor";
 import {ActorService} from "../service/actor-service";
 
 @Component({
@@ -8,7 +8,7 @@ import {ActorService} from "../service/actor-service";
   styleUrls: ['./actor-add.component.css']
 })
 export class ActorAddComponent {
-  actor: Actor = {
+  actor: Movie = {
     name: ''
   };
   submitted = false;

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Actor} from "../model/actor";
+import {Movie} from "../model/actor";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActorService} from "../service/actor-service";
 
@@ -11,7 +11,7 @@ import {ActorService} from "../service/actor-service";
 export class ActorDetailsComponent implements OnInit {
   @Input() viewMode = false;
 
-  @Input() currentActor: Actor = {
+  @Input() currentActor: Movie = {
     name: ''
   };
 

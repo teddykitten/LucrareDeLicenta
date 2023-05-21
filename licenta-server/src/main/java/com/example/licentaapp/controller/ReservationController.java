@@ -18,7 +18,7 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @PostMapping(path = "/seat")
+    @PostMapping(path = "/reservation")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         try {
             Reservation reservation1 = reservationRepository
@@ -29,7 +29,7 @@ public class ReservationController {
         }
     }
 
-    @DeleteMapping("/seat/{id}")
+    @DeleteMapping("/reservation/{id}")
     public ResponseEntity<HttpStatus> deleteReservation(@PathVariable("id") long id) {
         try {
             reservationRepository.deleteById(id);
@@ -39,7 +39,7 @@ public class ReservationController {
         }
     }
 
-    @PutMapping("/seat/{id}")
+    @PutMapping("/reservation/{id}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
         Optional<Reservation> reservationData = reservationRepository.findById(id);
 
@@ -52,13 +52,13 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/seat/{id}")
+    @GetMapping("/reservation/{id}")
     public ResponseEntity<Reservation> getReservationById(@PathVariable("id") long id) {
         Optional<Reservation> reservationData = reservationRepository.findById(id);
         return reservationData.map(reservation -> new ResponseEntity<>(reservation, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/seat")
+    @GetMapping("/reservation")
     public ResponseEntity<List<Reservation>> getAllReservations() {
         try {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

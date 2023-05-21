@@ -1,4 +1,4 @@
-export class Actor {
+export class Movie {
   id?: any;
   name: string;
 }
