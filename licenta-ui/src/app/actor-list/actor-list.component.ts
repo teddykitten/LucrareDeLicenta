@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Movie} from "../model/actor";
+import {Movie} from "../model/movie";
 import {ActorService} from "../service/actor-service";
+import {Actor} from "../model/actor";
 
 @Component({
   selector: 'app-actor-list',
@@ -9,8 +10,8 @@ import {ActorService} from "../service/actor-service";
 })
 export class ActorListComponent implements OnInit {
 
-  actors?: Movie[];
-  currentActor: Movie = {name: ""};
+  actors?: Actor[];
+  currentActor: Actor = {name: ""};
   currentIndex = -1;
   name = '';
 

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Movie} from "../model/actor";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActorService} from "../service/actor-service";
+import {Actor} from "../model/actor";
 
 @Component({
   selector: 'app-actor-details',
@@ -11,7 +11,7 @@ import {ActorService} from "../service/actor-service";
 export class ActorDetailsComponent implements OnInit {
   @Input() viewMode = false;
 
-  @Input() currentActor: Movie = {
+  @Input() currentActor: Actor = {
     name: ''
   };
 
@@ -59,7 +59,7 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.router.navigate(['/cinema/actor']).then(() =>res.message ? res.message : 'This actor was deleted successfully!' );
+          this.router.navigate(['/actor']).then(() =>res.message ? res.message : 'This actor was deleted successfully!' );
         },
         error: (e) => console.error(e)
       });
