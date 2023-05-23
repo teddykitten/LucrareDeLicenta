@@ -8,6 +8,7 @@ import {MovieAddComponent} from "./movie-add/movie-add.component";
 import {HallListComponent} from "./hall-list/hall-list.component";
 import {HallAddComponent} from "./hall-add/hall-add.component";
 import {ActorDetailsComponent} from "./actor-details/actor-details.component";
+import {MovieDetailsComponent} from "./movie-details/movie-details.component";
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'movie', component: MovieListComponent},
   {path: 'movie-add', component: MovieAddComponent},
+  {path: 'movie/:id', component: MovieDetailsComponent},
   {path: 'hall-list', component: HallListComponent},
   {path: 'hall-add', component: HallAddComponent},
   {path: 'actor-add', component: ActorAddComponent}

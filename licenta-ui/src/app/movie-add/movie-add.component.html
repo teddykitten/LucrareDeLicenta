@@ -32,15 +32,7 @@
           name="name"
         />
       </div>
-      <div class="form-group">
-        <label for="description">Genre</label>
-        <input
-          class="form-control"
-          id="genre"
-          required
-          [(ngModel)]="movie.genre"
-          name="name"
-        />
+      <div class="wrapper">
       </div>
       <div class="form-group">
         <label for="ageRestricted">Age restricted</label>
@@ -61,6 +53,43 @@
           [(ngModel)]="movie.duration"
           name="name"
         />
+      </div>
+      <div class="wrapper">
+        <div class="inner-wrap">
+          <mat-form-field>
+            <mat-select
+              [formControl]="genreCTRL"
+              placeholder="Genre"
+              [multiple]="true"
+              #singleSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search
+                  [formControl]="genreFilterCTRL"
+                  placeholderLabel="Select movie genres..."
+                  noEntriesFoundLabel="'no matching found'"
+                  [showToggleAllCheckbox]="true"
+                  toggleAllCheckboxTooltipMessage="Select / Unselect All"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="toggleSelectAll($event)"
+                >
+                  <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+                </ngx-mat-select-search>
+              </mat-option>
+
+              <mat-option *ngFor="let genre of filteredGenres | async" [value]="genre">
+                {{ genre.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="inner-wrap">
+          <h3>Selected Values</h3>
+          <ul *ngFor="let genre of genreCTRL?.value">
+            <li>{{ genre.name }}</li>
+          </ul>
+        </div>
       </div>
 
       <button (click)="saveMovie()" class="btn btn-success">Submit</button>

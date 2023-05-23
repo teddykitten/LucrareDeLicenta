@@ -19,6 +19,11 @@ import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 import {MovieDetailsComponent} from "./movie-details/movie-details.component";
 import {ActorService} from "./service/actor-service";
 import {MovieService} from "./service/movie-service";
+import {MatSelectModule} from "@angular/material/select";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -31,14 +36,19 @@ import {MovieService} from "./service/movie-service";
     HallAddComponent,
     ActorDetailsComponent,
     ActorListComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
+    MatIconModule
   ],
   providers: [ActorService, MovieService, ActorService, AuthenticationService, HallService, SeatService, httpInterceptorProviders],
   bootstrap: [AppComponent]
