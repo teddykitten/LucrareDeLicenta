@@ -39,7 +39,7 @@ export class ActorListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveActor(actor: Movie, index: number): void {
+  setActiveActor(actor: Actor, index: number): void {
     this.currentActor = actor;
     this.currentIndex = index;
   }

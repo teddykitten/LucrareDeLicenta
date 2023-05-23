@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'movie-add', component: MovieAddComponent},
   {path: 'hall-list', component: HallListComponent},
   {path: 'hall-add', component: HallAddComponent},
-  {path: 'add', component: ActorAddComponent}
+  {path: 'actor-add', component: ActorAddComponent}
 ];
 
 @NgModule({
