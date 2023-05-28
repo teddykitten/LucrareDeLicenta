@@ -122,7 +122,9 @@ export class MovieAddComponent implements OnInit{
         error: (e) => console.error(e)
       });
   }
-
+  goBack() {
+    window.history.back();
+  }
   newMovie(): void {
     this.submitted = false;
     this.movie = {

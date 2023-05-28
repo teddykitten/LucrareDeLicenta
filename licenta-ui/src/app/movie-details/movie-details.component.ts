@@ -15,7 +15,9 @@ export class MovieDetailsComponent implements OnInit {
     ageRestricted: "", description: "", duration: undefined, genre: "", rating: undefined,
     name: ''
   };
-
+  goBack() {
+    window.history.back();
+  }
   message = '';
 
   constructor(

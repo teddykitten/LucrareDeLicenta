@@ -1,1 +1,88 @@
-<p>movie-details works!</p>
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentMovie.id">
+    <h4>Movie</h4>
+    <div>
+      <label><strong>Name:</strong></label> {{ currentMovie.name }}
+    </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/movie/{{ currentMovie.id }}"
+    >
+      <button type="button" class="btn btn-primary">Edit</button>
+    </a>
+  </div>
+
+  <div *ngIf="!currentMovie">
+    <br/>
+    <p>Please click on a Movie...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentMovie.id" class="edit-form">
+    <h4>Movie</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentMovie.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentMovie.description"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input
+          type="text"
+          class="form-control"
+          id="rating"
+          [(ngModel)]="currentMovie.rating"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="age restricted">Age restricted</label>
+        <input
+          type="text"
+          class="form-control"
+          id="age restricted"
+          [(ngModel)]="currentMovie.ageRestricted"
+          name="name"
+        />
+      </div>
+    </form>
+
+    <div class="button-container">
+      <button class="delete-button" (click)="deleteMovie()">
+        Delete
+      </button>
+
+      <button
+        type="submit"
+        class="edit-button"
+        (click)="updateMovie()"
+      >
+        Update
+      </button>
+    </div>
+    <p>{{ message }}</p>
+  </div>
+  <button (click)="goBack()" class="btn-back">Back</button>
+  <div *ngIf="!currentMovie.id">
+    <br/>
+    <p>Cannot access this Movie...</p>
+  </div>
+</ng-template>

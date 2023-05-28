@@ -16,6 +16,10 @@ export class ActorAddComponent {
   constructor(public actorService: ActorService) {
   }
 
+  goBack() {
+    window.history.back();
+  }
+
   saveActor(): void {
     const data = {
       name: this.actor.name,

@@ -92,12 +92,16 @@
         </div>
       </div>
 
-      <button (click)="saveMovie()" class="btn btn-success">Submit</button>
+      <div class="space">
+        <button (click)="saveMovie()" class="btn-submit">Submit</button>
+        <button (click)="goBack()" class="btn-back">Back</button>
+      </div>
     </div>
 
     <div *ngIf="submitted">
       <h4>Movie was submitted successfully!</h4>
       <button class="btn btn-success" (click)="newMovie()">Add</button>
+      <button (click)="goBack()" class="btn-back">Back</button>
     </div>
   </div>
 </div>

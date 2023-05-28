@@ -13,12 +13,15 @@
         />
       </div>
 
-      <button (click)="saveActor()" class="btn btn-success">Submit</button>
+      <div class="space">
+        <button (click)="saveActor()" class="btn-submit">Submit</button>
+        <button (click)="goBack()" class="btn-back">Back</button>
+      </div>
     </div>
-
     <div *ngIf="submitted">
       <h4>Actor was submitted successfully!</h4>
-      <button class="btn btn-success" (click)="newActor()">Add</button>
+      <button class="btn-submit" (click)="newActor()">Add</button>
+      <button (click)="goBack()" class="btn-back">Back</button>
     </div>
   </div>
 </div>

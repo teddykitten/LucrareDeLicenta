@@ -30,6 +30,10 @@ export class ActorDetailsComponent implements OnInit {
     }
   }
 
+  goBack() {
+    window.history.back();
+  }
+
   getActor(id: string): void {
     this.actorService.get(id)
       .subscribe({
@@ -59,7 +63,7 @@ export class ActorDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.router.navigate(['/actor']).then(() =>res.message ? res.message : 'This actor was deleted successfully!' );
+          this.router.navigate(['/actor']).then(() => res.message ? res.message : 'This actor was deleted successfully!');
         },
         error: (e) => console.error(e)
       });

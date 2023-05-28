@@ -35,21 +35,22 @@
       </div>
     </form>
 
+    <div class="button-container">
+      <button class="delete-button" (click)="deleteActor()">
+        Delete
+      </button>
 
-    <button class="badge badge-danger mr-2" (click)="deleteActor()">
-      Delete
-    </button>
-
-    <button
-      type="submit"
-      class="badge badge-success mb-2"
-      (click)="updateActor()"
-    >
-      Update
-    </button>
+      <button
+        type="submit"
+        class="edit-button"
+        (click)="updateActor()"
+      >
+        Update
+      </button>
+    </div>
     <p>{{ message }}</p>
   </div>
-
+  <button (click)="goBack()" class="btn-back">Back</button>
   <div *ngIf="!currentActor.id">
     <br/>
     <p>Cannot access this Actor...</p>
