@@ -10,18 +10,18 @@ export interface Genre {
   name: string;
 }
 export const GENRE: Genre[] = [
-  { name: 'action', id: 'A' },
-  { name: 'drama', id: 'B' },
-  { name: 'romance', id: 'C' },
-  { name: 'horror', id: 'D' },
-  { name: 'comedy', id: 'E' },
+  {name: 'action', id: 'A'},
+  {name: 'drama', id: 'B'},
+  {name: 'romance', id: 'C'},
+  {name: 'horror', id: 'D'},
+  {name: 'comedy', id: 'E'},
 ];
 @Component({
   selector: 'app-movie-add',
   templateUrl: './movie-add.component.html',
   styleUrls: ['./movie-add.component.css']
 })
-export class MovieAddComponent implements OnInit{
+export class MovieAddComponent implements OnInit {
   protected genres: Genre[] = GENRE;
 
   public genreCTRL: UntypedFormControl = new UntypedFormControl();
@@ -30,7 +30,7 @@ export class MovieAddComponent implements OnInit{
 
   public filteredGenres: ReplaySubject<Genre[]> = new ReplaySubject<Genre[]>(1);
 
-  @ViewChild('singleSelect', { static: true })
+  @ViewChild('singleSelect', {static: true})
   singleSelect!: MatSelect;
   protected _onDestroy = new Subject<void>();
 
@@ -95,6 +95,7 @@ export class MovieAddComponent implements OnInit{
         }
       });
   }
+
   movie: Movie = {
     ageRestricted: "", description: "", duration: undefined, genre: "", rating: undefined,
     name: ''
@@ -109,7 +110,7 @@ export class MovieAddComponent implements OnInit{
       name: this.movie.name,
       description: this.movie.description,
       rating: this.movie.rating,
-      genre: this.movie.genre,
+      genre: this.genreCTRL.value.toString(),
       ageRestricted: this.movie.ageRestricted,
       duration: this.movie.duration,
     };
@@ -122,13 +123,19 @@ export class MovieAddComponent implements OnInit{
         error: (e) => console.error(e)
       });
   }
+
   goBack() {
     window.history.back();
   }
+
   newMovie(): void {
     this.submitted = false;
     this.movie = {
-      ageRestricted: "", description: "", duration: undefined, genre: "", rating: undefined,
+      ageRestricted: "",
+      description: "",
+      duration: undefined,
+      genre: this.genreCTRL.value.toString(),
+      rating: undefined,
       name: ''
     };
   }

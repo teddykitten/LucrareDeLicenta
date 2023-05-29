@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from "../model/movie";
 import {MovieService} from "../service/movie-service";
 import {ActivatedRoute, Router} from "@angular/router";
-
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',

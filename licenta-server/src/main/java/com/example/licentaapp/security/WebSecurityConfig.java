@@ -19,15 +19,13 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .cors().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/actor/add/**", "/actor/remove/**").hasRole("ADMIN")
-                        .requestMatchers("/actor/all/**").hasRole("USER")
-                        .requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin()
-                .defaultSuccessUrl("/ok", true);
+                        .requestMatchers("/**").permitAll()
+//                        .requestMatchers("/actor/add/**", "/actor/remove/**").hasRole("ADMIN")
+//                        .requestMatchers("/actor/all/**").hasRole("USER")
+//                        .requestMatchers("/login").permitAll()
+//                        .anyRequest().authenticated()
+                );
         return http.build();
     }
     @Bean

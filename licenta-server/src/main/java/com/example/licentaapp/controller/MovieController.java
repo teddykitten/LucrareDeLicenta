@@ -19,7 +19,7 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
-    @PostMapping(path = "/movie")
+    @PostMapping(path = "/movie-add")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
         try {
             Movie movie1 = movieRepository
