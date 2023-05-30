@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Movie} from "../model/movie";
+import {Actor} from "../model/actor";
 
 const baseUrl = 'http://localhost:8080/cinema/actor';
 
@@ -13,8 +13,8 @@ export class ActorService {
   constructor(private http: HttpClient) {
   }
 
-  public findAll(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(baseUrl);
+  public findAll(): Observable<Actor[]> {
+    return this.http.get<Actor[]>(baseUrl);
   }
 
   create(data: any): Observable<any> {
@@ -29,11 +29,11 @@ export class ActorService {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
-  get(id: any): Observable<Movie> {
-    return this.http.get<Movie>(`${baseUrl}/${id}`);
+  get(id: any): Observable<Actor> {
+    return this.http.get<Actor>(`${baseUrl}/${id}`);
   }
 
-  findByName(name: any): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${baseUrl}?name=${name}`);
+  findByName(name: any): Observable<Actor[]> {
+    return this.http.get<Actor[]>(`${baseUrl}?name=${name}`);
   }
 }

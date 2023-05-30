@@ -19,7 +19,7 @@
           id="description"
           required
           [(ngModel)]="movie.description"
-          name="name"
+          name="description"
         />
       </div>
       <div class="form-group">
@@ -29,7 +29,7 @@
           id="rating"
           required
           [(ngModel)]="movie.rating"
-          name="name"
+          name="rating"
         />
       </div>
       <div class="wrapper">
@@ -41,7 +41,7 @@
           id="ageRestricted"
           required
           [(ngModel)]="movie.ageRestricted"
-          name="name"
+          name="ageRestricted"
         />
       </div>
       <div class="form-group">
@@ -51,7 +51,7 @@
           id="duration"
           required
           [(ngModel)]="movie.duration"
-          name="name"
+          name="duration"
         />
       </div>
       <div class="wrapper">
@@ -79,7 +79,7 @@
               </mat-option>
 
               <mat-option *ngFor="let genre of filteredGenres | async" [value]="genre">
-                {{ genre.name }}
+                {{ genre}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -87,7 +87,7 @@
         <div class="inner-wrap">
           <h3>Selected Values</h3>
           <ul *ngFor="let genre of genreCTRL?.value">
-            <li>{{ genre.name }}</li>
+            <li>{{ genre }}</li>
           </ul>
         </div>
       </div>
@@ -97,7 +97,6 @@
         <button (click)="goBack()" class="btn-back">Back</button>
       </div>
     </div>
-
     <div *ngIf="submitted">
       <h4>Movie was submitted successfully!</h4>
       <button class="btn btn-success" (click)="newMovie()">Add</button>

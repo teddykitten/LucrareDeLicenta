@@ -4,6 +4,21 @@
     <div>
       <label><strong>Name:</strong></label> {{ currentMovie.name }}
     </div>
+    <div>
+      <label><strong>Description:</strong></label> {{ currentMovie.description }}
+    </div>
+    <div>
+      <label><strong>Rating:</strong></label> {{ currentMovie.rating }}
+    </div>
+    <div>
+      <label><strong>Genre:</strong></label> {{ currentMovie.genre }}
+    </div>
+    <div>
+      <label><strong>Age Restricted:</strong></label> {{ currentMovie.ageRestricted }}
+    </div>
+    <div>
+      <label><strong>Duration:</strong></label> {{ currentMovie.duration }}
+    </div>
 
     <a
       class="badge badge-warning"
@@ -40,7 +55,7 @@
           class="form-control"
           id="description"
           [(ngModel)]="currentMovie.description"
-          name="name"
+          name="description"
         />
       </div>
       <div class="form-group">
@@ -50,7 +65,7 @@
           class="form-control"
           id="rating"
           [(ngModel)]="currentMovie.rating"
-          name="name"
+          name="rating"
         />
       </div>
       <div class="form-group">
@@ -60,8 +75,49 @@
           class="form-control"
           id="age restricted"
           [(ngModel)]="currentMovie.ageRestricted"
-          name="name"
+          name="age restricted"
         />
+      </div>
+      <div class="form-group">
+        <label for="Duration">Duration</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Duration"
+          [(ngModel)]="currentMovie.duration"
+          name="Duration"
+        />
+      </div>
+      <div class="wrapper">
+        <div class="inner-wrap">
+          <mat-form-field>
+            <mat-select
+              [formControl]="genreCTRL"
+              placeholder="Genre"
+              [multiple]="true"
+              #singleSelect
+            >
+              <mat-option>
+                <ngx-mat-select-search
+                  [formControl]="genreFilterCTRL"
+                  placeholderLabel="Select movie genres..."
+                  noEntriesFoundLabel="'no matching found'"
+                  [showToggleAllCheckbox]="true"
+                  toggleAllCheckboxTooltipMessage="Select / Unselect All"
+                  [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                  [toggleAllCheckboxChecked]="isChecked"
+                  (toggleAll)="toggleSelectAll($event)"
+                >
+                  <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+                </ngx-mat-select-search>
+              </mat-option>
+
+              <mat-option *ngFor="let genre of filteredGenres | async" [value]="genre">
+                {{ genre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
 
     </form>

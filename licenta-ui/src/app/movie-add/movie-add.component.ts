@@ -5,30 +5,21 @@ import {UntypedFormControl} from "@angular/forms";
 import {ReplaySubject, Subject, take, takeUntil} from "rxjs";
 import {MatSelect} from "@angular/material/select";
 
-export interface Genre {
-  id: string;
-  name: string;
-}
-export const GENRE: Genre[] = [
-  {name: 'action', id: 'A'},
-  {name: 'drama', id: 'B'},
-  {name: 'romance', id: 'C'},
-  {name: 'horror', id: 'D'},
-  {name: 'comedy', id: 'E'},
-];
+export const GENRE = ["action", "drama", "romance", "horror", "comedy"];
+
 @Component({
   selector: 'app-movie-add',
   templateUrl: './movie-add.component.html',
   styleUrls: ['./movie-add.component.css']
 })
 export class MovieAddComponent implements OnInit {
-  protected genres: Genre[] = GENRE;
+  protected genres: string[] = GENRE;
 
   public genreCTRL: UntypedFormControl = new UntypedFormControl();
 
   public genreFilterCTRL: UntypedFormControl = new UntypedFormControl();
 
-  public filteredGenres: ReplaySubject<Genre[]> = new ReplaySubject<Genre[]>(1);
+  public filteredGenres: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
   @ViewChild('singleSelect', {static: true})
   singleSelect!: MatSelect;
@@ -39,8 +30,6 @@ export class MovieAddComponent implements OnInit {
 
 
   ngOnInit() {
-    this.genreCTRL.setValue([this.genres[1], this.genres[2]]);
-
     this.filteredGenres.next(this.genres.slice());
 
     this.genreFilterCTRL.valueChanges
@@ -63,8 +52,8 @@ export class MovieAddComponent implements OnInit {
     this.filteredGenres
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.singleSelect.compareWith = (a: Genre, b: Genre) =>
-          a && b && a.id === b.id;
+        this.singleSelect.compareWith = (a: string, b: string) =>
+          a === b;
       });
   }
 
@@ -80,7 +69,7 @@ export class MovieAddComponent implements OnInit {
       search = search.toLowerCase();
     }
     this.filteredGenres.next(
-      this.genres.filter((genre) => genre.name.toLowerCase().indexOf(search) > -1)
+      this.genres.filter((genre) => genre.toLowerCase().indexOf(search) > -1)
     );
   }
 
@@ -105,12 +94,13 @@ export class MovieAddComponent implements OnInit {
   constructor(public movieService: MovieService) {
   }
 
+
   saveMovie(): void {
     const data = {
       name: this.movie.name,
       description: this.movie.description,
       rating: this.movie.rating,
-      genre: this.genreCTRL.value.toString(),
+      genre: this.genreCTRL.value.join(','),
       ageRestricted: this.movie.ageRestricted,
       duration: this.movie.duration,
     };
@@ -134,9 +124,10 @@ export class MovieAddComponent implements OnInit {
       ageRestricted: "",
       description: "",
       duration: undefined,
-      genre: this.genreCTRL.value.toString(),
+      genre: "",
       rating: undefined,
       name: ''
     };
+    this.genreCTRL.setValue("")
   }
 }
