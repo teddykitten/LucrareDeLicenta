@@ -3,9 +3,11 @@ package com.example.licentaapp.controller;
 import com.example.licentaapp.repository.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
 
 import java.util.ArrayList;
@@ -19,8 +21,9 @@ public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
 
-    @PostMapping(path = "/actor")
-    public ResponseEntity<Actor> createActor(@RequestBody Actor actor) {
+    @PostMapping(path = "/actor", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Actor> createActor(@RequestPart("actor") Actor actor,
+                                             @RequestPart("imageFile") MultipartFile[] file) {
         try {
             Actor _actor = actorRepository
                     .save(actor);

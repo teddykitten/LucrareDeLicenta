@@ -12,7 +12,8 @@ export class ActorDetailsComponent implements OnInit {
   @Input() viewMode = false;
 
   @Input() currentActor: Actor = {
-    name: ''
+    name: '',
+    imagine: []
   };
 
   message = '';

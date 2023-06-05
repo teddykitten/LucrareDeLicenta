@@ -47,6 +47,11 @@ public class MovieController {
         if (movieData.isPresent()) {
             Movie movie1 = movieData.get();
             movie1.setName(movie.getName());
+            movie1.setDescription(movie.getDescription());
+            movie1.setDuration(movie.getDuration());
+            movie1.setGenre(movie.getGenre());
+            movie1.setAgeRestricted(movie.getAgeRestricted());
+            movie1.setRating(movie.getRating());
             return new ResponseEntity<>(movieRepository.save(movie1), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

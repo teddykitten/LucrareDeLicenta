@@ -115,11 +115,10 @@ export class MovieDetailsComponent implements OnInit {
 
   updateMovie(): void {
     this.message = '';
-
+    this.currentMovie.genre = this.genreCTRL.value.join(',');
     this.movieService.update(this.currentMovie.id, this.currentMovie)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.message = res.message ? res.message : 'This movie was updated successfully!';
         },
         error: (e) => console.error(e)

@@ -10,7 +10,7 @@ import {Actor} from "../model/actor";
 export class ActorListComponent implements OnInit {
 
   actors?: Actor[];
-  currentActor: Actor = {name: ""};
+  currentActor: Actor = {name: "", imagine: []};
   currentIndex = -1;
   name = '';
 
@@ -34,7 +34,7 @@ export class ActorListComponent implements OnInit {
 
   refreshList(): void {
     this.retrieveActor();
-    this.currentActor = {name: ""};
+    this.currentActor = {name: "", imagine: []};
     this.currentIndex = -1;
   }
 
@@ -44,7 +44,7 @@ export class ActorListComponent implements OnInit {
   }
 
   searchName(): void {
-    this.currentActor = {name: ""};
+    this.currentActor = {name: "", imagine: []};
     this.currentIndex = -1;
 
     this.actorService.findByName(this.name)

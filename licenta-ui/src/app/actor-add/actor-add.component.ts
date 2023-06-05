@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {ActorService} from "../service/actor-service";
 import {Actor} from "../model/actor";
+import {DomSanitizer} from "@angular/platform-browser";
+import {FileHandle} from "../model/file-handler";
 
 @Component({
   selector: 'app-actor-add',
@@ -9,11 +11,13 @@ import {Actor} from "../model/actor";
 })
 export class ActorAddComponent {
   actor: Actor = {
-    name: ''
+    name: '',
+    imagine: []
   };
   submitted = false;
 
-  constructor(public actorService: ActorService) {
+  constructor(public actorService: ActorService,
+              private sanitizer: DomSanitizer) {
   }
 
   goBack() {
@@ -21,10 +25,17 @@ export class ActorAddComponent {
   }
 
   saveActor(): void {
-    const data = {
-      name: this.actor.name,
-    };
-    this.actorService.create(data)
+    const formData = new FormData();
+    formData.append(
+      "actor",
+      new Blob([JSON.stringify(this.actor)], {type: "application/json"})
+    )
+    formData.append(
+      "imageFile",
+      this.actor.imagine[0].file,
+      this.actor.imagine[0].file.name
+    )
+    this.actorService.create(formData)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -37,7 +48,22 @@ export class ActorAddComponent {
   newActor(): void {
     this.submitted = false;
     this.actor = {
-      name: ''
+      name: '',
+      imagine: []
     };
+  }
+
+  onSelectedFile({event}: { event: any }) {
+    if (event.target.files) {
+      const file = event.target.files[0];
+
+      const fileHandle: FileHandle = {
+        file: file,
+        url: this.sanitizer.bypassSecurityTrustUrl(
+          window.URL.createObjectURL(file)
+        )
+      }
+      this.actor.imagine.push(fileHandle)
+    }
   }
 }
