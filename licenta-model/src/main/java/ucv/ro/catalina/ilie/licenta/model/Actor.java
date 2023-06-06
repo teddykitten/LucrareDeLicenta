@@ -10,6 +10,19 @@ public class Actor {
     @GeneratedValue
     private Long id;
     private String name;
+    @ManyToMany
+    @JoinTable(name = "actor_image",
+            joinColumns = {
+                    @JoinColumn(name = "actor_id")}, inverseJoinColumns = {@JoinColumn(name = "image_id")})
+    private Set<Image> actorImage;
+
+    public Set<Image> getActorImage() {
+        return actorImage;
+    }
+
+    public void setActorImage(Set<Image> actorImage) {
+        this.actorImage = actorImage;
+    }
 
     @OneToMany(mappedBy = "actor")
     private Set<MovieActor> principalActors;

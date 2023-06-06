@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ucv.ro.catalina.ilie.licenta.model.Actor;
+import ucv.ro.catalina.ilie.licenta.model.Image;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 
 @Controller
@@ -27,10 +27,25 @@ public class ActorController {
         try {
             Actor _actor = actorRepository
                     .save(actor);
+            Set<Image> images = uploadImage(file);
+            actor.setActorImage(images);
             return new ResponseEntity<>(_actor, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public Set<Image> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+        Set<Image> images = new HashSet<>();
+        for (MultipartFile file : multipartFiles) {
+            Image image = new Image(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                    file.getBytes()
+            );
+            images.add(image);
+        }
+        return images;
     }
 
     @DeleteMapping("/actor/{id}")
