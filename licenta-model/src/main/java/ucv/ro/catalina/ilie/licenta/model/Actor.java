@@ -10,7 +10,7 @@ public class Actor {
     @GeneratedValue
     private Long id;
     private String name;
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "actor_image",
             joinColumns = {
                     @JoinColumn(name = "actor_id")}, inverseJoinColumns = {@JoinColumn(name = "image_id")})

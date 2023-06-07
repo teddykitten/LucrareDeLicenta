@@ -25,10 +25,10 @@ public class ActorController {
     public ResponseEntity<Actor> createActor(@RequestPart("actor") Actor actor,
                                              @RequestPart("imageFile") MultipartFile[] file) {
         try {
-            Actor _actor = actorRepository
-                    .save(actor);
             Set<Image> images = uploadImage(file);
             actor.setActorImage(images);
+            Actor _actor = actorRepository
+                    .save(actor);
             return new ResponseEntity<>(_actor, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
