@@ -24,6 +24,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {MatIconModule} from "@angular/material/icon";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatSelectModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
   ],
   providers: [ActorService, MovieService, ActorService, AuthenticationService, HallService, SeatService, httpInterceptorProviders],
   bootstrap: [AppComponent]

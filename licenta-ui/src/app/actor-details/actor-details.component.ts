@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ActorService} from "../service/actor-service";
 import {Actor} from "../model/actor";
+import {ImageProcessingService} from "../service/image-processing.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-actor-details',
@@ -21,6 +23,7 @@ export class ActorDetailsComponent implements OnInit {
   constructor(
     private actorService: ActorService,
     private route: ActivatedRoute,
+    private imageProcessingService: ImageProcessingService,
     private router: Router) {
   }
 
@@ -37,6 +40,9 @@ export class ActorDetailsComponent implements OnInit {
 
   getActor(id: string): void {
     this.actorService.get(id)
+      .pipe(
+        map((x: Actor, i) => x.map((actor: Actor) => this.imageProcessingService.createImages(actor)))
+      )
       .subscribe({
         next: (data) => {
           this.currentActor = data;
