@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActorService} from "../service/actor-service";
 import {Actor} from "../model/actor";
+import {map} from "rxjs/operators";
+import {ImageProcessingService} from "../service/image-processing.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ActorDetailsComponent} from "../actor-details/actor-details.component";
 
 @Component({
   selector: 'app-actor-list',
@@ -9,12 +13,14 @@ import {Actor} from "../model/actor";
 })
 export class ActorListComponent implements OnInit {
 
-  actors?: Actor[];
-  currentActor: Actor = {name: "", imagine: []};
+  actors?: Actor[] = [];
+  currentActor: Actor = {name: "", actorImage: []};
   currentIndex = -1;
   name = '';
 
-  constructor(private actorService: ActorService) {
+  constructor(private actorService: ActorService,
+              private imageProcessingService: ImageProcessingService) {
+
   }
 
   ngOnInit(): void {
@@ -23,6 +29,9 @@ export class ActorListComponent implements OnInit {
 
   retrieveActor(): void {
     this.actorService.findAll()
+      .pipe(
+        map((x: Actor[], index) => x.map((actor: Actor) => this.imageProcessingService.createImages(actor)))
+      )
       .subscribe({
         next: (data) => {
           this.actors = data;
@@ -34,17 +43,18 @@ export class ActorListComponent implements OnInit {
 
   refreshList(): void {
     this.retrieveActor();
-    this.currentActor = {name: "", imagine: []};
+    this.currentActor = {name: "", actorImage: []};
     this.currentIndex = -1;
   }
 
   setActiveActor(actor: Actor, index: number): void {
     this.currentActor = actor;
     this.currentIndex = index;
+    console.log("active actor", this.currentActor)
   }
 
   searchName(): void {
-    this.currentActor = {name: "", imagine: []};
+    this.currentActor = {name: "", actorImage: []};
     this.currentIndex = -1;
 
     this.actorService.findByName(this.name)

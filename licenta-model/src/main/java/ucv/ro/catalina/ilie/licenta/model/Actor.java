@@ -11,17 +11,17 @@ public class Actor {
     private Long id;
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "actor_image",
+    @JoinTable(name = "imagine",
             joinColumns = {
                     @JoinColumn(name = "actor_id")}, inverseJoinColumns = {@JoinColumn(name = "image_id")})
-    private Set<Image> actorImage;
+    private Set<Image> imagine;
 
     public Set<Image> getActorImage() {
-        return actorImage;
+        return imagine;
     }
 
-    public void setActorImage(Set<Image> actorImage) {
-        this.actorImage = actorImage;
+    public void setActorImage(Set<Image> imagine) {
+        this.imagine = imagine;
     }
 
     @OneToMany(mappedBy = "actor")

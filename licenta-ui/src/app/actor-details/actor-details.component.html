@@ -3,14 +3,11 @@
     <h4>Actor</h4>
     <div>
       <label><strong>Name:</strong></label> {{ currentActor.name }}
-      <div class="mt-5">
-        <div class="row">
-            <mat-grid-tile *ngFor="let file of currentActor.imagine;">
-              <div style="position: relative">
-                <img [src]="file.url" alt="test" width="200px" height="200px">
-              </div>
-            </mat-grid-tile>
-        </div>
+    </div>
+
+    <div *ngFor="let file of currentActor.actorImage;">
+      <div>
+        <img [src]="file.url" alt="test"  height="200px">
       </div>
     </div>
 

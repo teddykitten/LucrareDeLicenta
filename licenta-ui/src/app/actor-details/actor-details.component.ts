@@ -4,6 +4,7 @@ import {ActorService} from "../service/actor-service";
 import {Actor} from "../model/actor";
 import {ImageProcessingService} from "../service/image-processing.service";
 import {map} from "rxjs/operators";
+import {FileHandle} from "../model/file-handler";
 
 @Component({
   selector: 'app-actor-details',
@@ -15,7 +16,7 @@ export class ActorDetailsComponent implements OnInit {
 
   @Input() currentActor: Actor = {
     name: '',
-    imagine: []
+    actorImage: []
   };
 
   message = '';
@@ -40,9 +41,6 @@ export class ActorDetailsComponent implements OnInit {
 
   getActor(id: string): void {
     this.actorService.get(id)
-      .pipe(
-        map((x: Actor, i) => x.map((actor: Actor) => this.imageProcessingService.createImages(actor)))
-      )
       .subscribe({
         next: (data) => {
           this.currentActor = data;

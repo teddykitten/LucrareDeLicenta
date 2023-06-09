@@ -12,7 +12,7 @@ import {FileHandle} from "../model/file-handler";
 export class ActorAddComponent {
   actor: Actor = {
     name: '',
-    imagine: []
+    actorImage: []
   };
   submitted = false;
 
@@ -32,8 +32,8 @@ export class ActorAddComponent {
     )
     formData.append(
       "imageFile",
-      this.actor.imagine[0].file,
-      this.actor.imagine[0].file.name
+      this.actor.actorImage[0].file,
+      this.actor.actorImage[0].file.name
     )
     this.actorService.create(formData)
       .subscribe({
@@ -49,7 +49,7 @@ export class ActorAddComponent {
     this.submitted = false;
     this.actor = {
       name: '',
-      imagine: []
+      actorImage: []
     };
   }
 
@@ -63,7 +63,7 @@ export class ActorAddComponent {
           window.URL.createObjectURL(file)
         )
       }
-      this.actor.imagine.push(fileHandle)
+      this.actor.actorImage.push(fileHandle)
     }
   }
 }

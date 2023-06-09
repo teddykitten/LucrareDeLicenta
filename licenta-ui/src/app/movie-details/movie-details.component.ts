@@ -102,6 +102,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovie(id: string): void {
+    console.log("get movie", this.currentMovie)
     this.movieService.get(id)
       .subscribe({
         next: (data) => {

@@ -12,12 +12,11 @@ export class ImageProcessingService {
   }
 
   public createImages(actor: Actor) {
-    const actorImages: any[] = actor.imagine;
+    const actorImages: any[] = actor.actorImage;
     const actorImageHandle: FileHandle[] = [];
     for (let i = 0; i < actorImages.length; i++) {
       const imageFileData = actorImages[i];
-      const imageBlob = this.dataURItoBlob(imageFileData.picBytes, imageFileData.type);
-
+      const imageBlob = this.dataURItoBlob(imageFileData.picByte, imageFileData.type);
       const imageFile = new File([imageBlob], imageFileData.name, {type: imageFileData.type})
       const finalFileHandle: FileHandle = {
         file: imageFile,
@@ -25,7 +24,7 @@ export class ImageProcessingService {
       };
       actorImageHandle.push(finalFileHandle);
     }
-    actor.imagine = actorImageHandle;
+    actor.actorImage = actorImageHandle;
     return actor;
   }
 
@@ -39,8 +38,7 @@ export class ImageProcessingService {
 
     }
 
-    const blob = new Blob([int8Array], {type: imageType});
-    return blob;
+    return new Blob([int8Array], {type: imageType});
 
 
   }
