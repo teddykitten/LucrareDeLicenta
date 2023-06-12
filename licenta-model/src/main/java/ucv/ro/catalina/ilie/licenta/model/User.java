@@ -7,18 +7,25 @@ import java.util.Set;
 @Entity
 public class User {
     @Id
-    @GeneratedValue
-    private int id;
     private String username;
     private String email;
     private String password;
+
+    public Set<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<Role> role) {
+        this.role = role;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role",
+    @JoinTable(name = "USER_ROLE",
             joinColumns = {
-                    @JoinColumn(name = "user_id")
+                    @JoinColumn(name = "USER_ID")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "role_id")
+                    @JoinColumn(name = "ROLE_ID")
             })
     private Set<Role> role;
     @OneToMany
@@ -50,12 +57,12 @@ public class User {
         this.bookedMovies = bookedMovies;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return username;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String username) {
+        this.username = username;
     }
 
     public String getUsername() {
