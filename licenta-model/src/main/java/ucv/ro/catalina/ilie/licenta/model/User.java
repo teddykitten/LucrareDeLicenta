@@ -11,7 +11,16 @@ public class User {
     private int id;
     private String username;
     private String email;
-    private char[] password;
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
+            joinColumns = {
+                    @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "role_id")
+            })
+    private Set<Role> role;
     @OneToMany
     private Set<Movie> bookedMovies;
     @OneToMany
@@ -65,11 +74,11 @@ public class User {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

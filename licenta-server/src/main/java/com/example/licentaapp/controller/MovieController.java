@@ -69,15 +69,10 @@ public class MovieController {
         try {
             List<Movie> movies = new ArrayList<>();
 
-            if (name == null)
+            if (name == null || genre == null)
                 movies.addAll(movieRepository.findAll());
             else
                 movies.addAll(movieRepository.findByName(name));
-            if (genre == null)
-                movies.addAll(movieRepository.findAll());
-            else {
-                movies.addAll(movieRepository.findByGenre(genre));
-            }
             if (movies.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
