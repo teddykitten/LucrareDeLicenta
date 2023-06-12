@@ -20,11 +20,11 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User registerNewUser(User user) {
-//        Role role = userRepository.findById("User").get();
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(role);
-//        user.setRole(roles);
-//        user.setPassword(getEncodedPassword(user.getPassword()));
+        Role role = roleRepository.findById("User").get();
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRole(roles);
+        user.setPassword(getEncodedPassword(user.getPassword()));
         return userRepository.save(user);
 
     }
@@ -49,7 +49,7 @@ public class UserService {
         adminUser.setPassword(getEncodedPassword("adminpass"));
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(adminRole);
-//        adminUser.setRole(adminRoles);  //eroare
+        adminUser.setRole(adminRoles);
         userRepository.save(adminUser);
 
         User user = new User();
@@ -58,7 +58,7 @@ public class UserService {
         user.setPassword(getEncodedPassword("userpass"));
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
-//        user.setRole(userRoles);
+        user.setRole(userRoles);
         userRepository.save(user);
     }
 
