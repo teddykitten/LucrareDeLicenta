@@ -1,15 +1,24 @@
 <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">Cinema</a>
-    <div class="navbar-nav mr-auto">
+    <div class="navbar-nav  ml-auto">
       <li class="nav-item">
         <a routerLink="actor" class="nav-link">Actors</a>
       </li>
       <li class="nav-item">
         <a routerLink="movie" class="nav-link">Movie</a>
       </li>
+      <li class="nav-item">
+        <a routerLink="user" class="nav-link">User</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="admin" class="nav-link">Admin</a>
+      </li>
     </div>
-
+    <li class="nav-item">
+      <button type="button" class="btn btn-success" routerLink="login">Login</button>
+      <button type="button" class="btn btn-danger">Logout</button>
+    </li>
   </nav>
 
   <div class="container mt-3">

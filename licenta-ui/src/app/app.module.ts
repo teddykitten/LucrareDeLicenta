@@ -5,9 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {ActorListComponent} from './actor-list/actor-list.component';
-import {LoginComponent} from "./login/login.component";
-import {AuthenticationService} from "./login/authentication-service";
-import {httpInterceptorProviders} from "./login/authguard";
 import {ActorAddComponent} from "./actor-add/actor-add.component";
 import {MovieListComponent} from "./movie-list/movie-list.component";
 import {MovieAddComponent} from "./movie-add/movie-add.component";
@@ -25,11 +22,19 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {LoginComponent} from "./login/login.component";
+import {AdminComponent} from "./admin/admin.component";
+import {UserComponent} from "./user/user.component";
+import {ForbiddenComponent} from "./forbidden/forbidden.component";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    AdminComponent,
+    UserComponent,
+    ForbiddenComponent,
     ActorAddComponent,
     MovieListComponent,
     MovieAddComponent,
@@ -50,9 +55,10 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatFormFieldModule,
     NgxMatSelectSearchModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    RouterModule
   ],
-  providers: [ActorService, MovieService, ActorService, AuthenticationService, HallService, SeatService, httpInterceptorProviders],
+  providers: [ActorService, MovieService, ActorService, HallService, SeatService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
