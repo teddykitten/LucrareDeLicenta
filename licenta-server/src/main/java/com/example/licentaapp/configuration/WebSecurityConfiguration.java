@@ -41,7 +41,7 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors();
         http.csrf().disable()
-                .authorizeHttpRequests().requestMatchers("/authenticate").permitAll() //eroare
+                .authorizeHttpRequests().requestMatchers("/**").permitAll()
                 .requestMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -60,5 +60,4 @@ public class WebSecurityConfiguration {
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(jwtService).passwordEncoder(passwordEncoder());
     }
-
 }
