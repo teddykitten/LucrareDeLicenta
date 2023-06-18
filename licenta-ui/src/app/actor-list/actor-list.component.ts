@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActorService} from "../service/actor-service";
+import {ActorService} from ".././_service/actor-service";
 import {Actor} from "../model/actor";
 import {map} from "rxjs/operators";
-import {ImageProcessingService} from "../service/image-processing.service";
+import {ImageProcessingService} from ".././_service/image-processing.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ActorDetailsComponent} from "../actor-details/actor-details.component";
 

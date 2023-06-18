@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Movie} from "../model/movie";
-import {MovieService} from "../service/movie-service";
+import {MovieService} from ".././_service/movie-service";
 import {UntypedFormControl} from "@angular/forms";
 import {ReplaySubject, Subject, take, takeUntil} from "rxjs";
 import {MatSelect} from "@angular/material/select";

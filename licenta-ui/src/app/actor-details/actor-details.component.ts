@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ActorService} from "../service/actor-service";
+import {ActorService} from ".././_service/actor-service";
 import {Actor} from "../model/actor";
-import {ImageProcessingService} from "../service/image-processing.service";
+import {ImageProcessingService} from ".././_service/image-processing.service";
 import {map} from "rxjs/operators";
 import {FileHandle} from "../model/file-handler";
 

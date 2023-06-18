@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActorService} from "../service/actor-service";
+import {ActorService} from ".././_service/actor-service";
 import {Actor} from "../model/actor";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FileHandle} from "../model/file-handler";
