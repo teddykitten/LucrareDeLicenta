@@ -8,14 +8,8 @@ import {ActorListComponent} from './actor-list/actor-list.component';
 import {ActorAddComponent} from "./actor-add/actor-add.component";
 import {MovieListComponent} from "./movie-list/movie-list.component";
 import {MovieAddComponent} from "./movie-add/movie-add.component";
-import {HallListComponent} from "./hall-list/hall-list.component";
-import {HallAddComponent} from "./hall-add/hall-add.component";
-import {HallService} from "./service/hall-service";
-import {SeatService} from "./service/seat-service";
 import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 import {MovieDetailsComponent} from "./movie-details/movie-details.component";
-import {ActorService} from "./service/actor-service";
-import {MovieService} from "./service/movie-service";
 import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -27,6 +21,8 @@ import {AdminComponent} from "./admin/admin.component";
 import {UserComponent} from "./user/user.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {RouterModule} from "@angular/router";
+import {ActorService} from "./_service/actor-service";
+import {MovieService} from "./_service/movie-service";
 
 @NgModule({
   declarations: [
@@ -38,8 +34,6 @@ import {RouterModule} from "@angular/router";
     ActorAddComponent,
     MovieListComponent,
     MovieAddComponent,
-    HallListComponent,
-    HallAddComponent,
     ActorDetailsComponent,
     ActorListComponent,
     MovieDetailsComponent,
@@ -58,7 +52,7 @@ import {RouterModule} from "@angular/router";
     MatGridListModule,
     RouterModule
   ],
-  providers: [ActorService, MovieService, ActorService, HallService, SeatService],
+  providers: [ActorService, MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

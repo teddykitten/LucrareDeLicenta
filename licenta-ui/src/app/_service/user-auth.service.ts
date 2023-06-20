@@ -5,15 +5,29 @@ import {Injectable} from '@angular/core';
 })
 export class UserAuthService {
 
-  constructor() {
-  }
 
   public setRoles(roles: []) {
-    localStorage.setItem("roles", JSON.stringify(roles));
+    localStorage.setItem('roles', JSON.stringify(roles));
+  }
+
+  public getRoles(): [] {
+    const roles = localStorage.getItem('roles');
+    if (roles == null) {
+      return [];
+    }
+    return JSON.parse(roles);
   }
 
   public setToken(jwtToken: string) {
-    localStorage.setItem("jwtToken", jwtToken);
+    localStorage.setItem('jwtToken', jwtToken);
+  }
+
+  public getToken(): string {
+    const token = localStorage.getItem('jwtToken');
+    if (token == null) {
+      return "";
+    }
+    return token;
   }
 
   public clear() {
@@ -21,6 +35,6 @@ export class UserAuthService {
   }
 
   public isLoggedIn() {
-
+    return this.getRoles() && this.getToken().length > 0;
   }
 }

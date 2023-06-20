@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../_service/auth.service";
-import {StorageService} from "../_service/storage.service";
+import {UserService} from "../_service/user.service";
+import {UserAuthService} from "../_service/user-auth.service";
+import {Router} from "@angular/router";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -8,44 +10,36 @@ import {StorageService} from "../_service/storage.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: any = {
-    username: null,
-    password: null
-  };
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
-
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(
+    private userService: UserService,
+    private userAuthService: UserAuthService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
-    }
   }
 
-  onSubmit(): void {
-    const { username, password } = this.form;
+  login(loginForm: NgForm) {
+    this.userService.login(loginForm.value).subscribe(
+      {
+        next: (res: any) => {
+          console.log(res.jwtToken);
+          console.log(res.user.role);
 
-    this.authService.login(username, password).subscribe({
-      next: data => {
-        this.storageService.saveUser(data);
+          this.userAuthService.setRoles(res.user.role);
+          this.userAuthService.setToken(res.user.jwtToken);
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
-        this.reloadPage();
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-    });
+          const role = res.user.role[0].roleName;
+          if (role == 'Admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/user']);
+          }
+        },
+        error: (e) => console.error(e)
+      });
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
+
 }
