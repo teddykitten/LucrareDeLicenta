@@ -1,16 +1,17 @@
 package com.example.licentaapp.controller;
 
 import com.example.licentaapp.repository.HallRepository;
+import com.example.licentaapp.repository.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ucv.ro.catalina.ilie.licenta.model.Hall;
+import ucv.ro.catalina.ilie.licenta.model.Seat;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class HallController {
     @Autowired
     private HallRepository hallRepository;
+    @Autowired
+    private SeatRepository seatRepository;
 
     @PostMapping(path = "/hall")
     public ResponseEntity<Hall> createHall(@RequestBody Hall hall) {
@@ -28,6 +31,34 @@ public class HallController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping(path = "/insertDummyHall")
+    public ResponseEntity<Hall> createHall() {
+        Hall hall = new Hall();
+        hall.setName("test");
+        Set<Seat> seats = new HashSet<>();
+        for (int r = 1; r <= 2; r++) {
+            for (int s = 1; s <= 3; s++) {
+                seats.add(new Seat(r, s));
+            }
+        }
+        Set<Seat> collect = seats.stream().map(seat -> seatRepository.save(seat)).collect(Collectors.toSet());
+        hall.setSeats(collect);
+        Hall hall1 = hallRepository.save(hall);
+        return new ResponseEntity<>(hall1, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "/insertDummyHall/{id}")
+    public ResponseEntity<Map<String, Object>> listHall(@PathVariable("id") long id) {
+        Hall hall = hallRepository.getReferenceById(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("name", hall.getName());
+        response.put("rows", hall.getSeats().stream().map(Seat::getSeatRow).distinct().count());
+        Map<Integer, Long> collect1 = hall.getSeats().stream().collect(Collectors.groupingBy(Seat::getSeatRow,
+                Collectors.counting()));
+        response.put("seats", collect1);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/hall/{id}")

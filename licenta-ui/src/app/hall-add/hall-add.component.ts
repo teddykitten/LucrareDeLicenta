@@ -33,7 +33,7 @@ export class HallAddComponent implements OnInit {
     const rowNumber = this.form.get('rowNumber')!.value;
     this.seats = [];
     for (let i = 1; i <= rowNumber; i++) {
-      const fieldName = `seat ${i}`;
+      const fieldName = `row${i}`;
       this.seats.push({
         label: `Row ${i}`,
         type: 'text',
