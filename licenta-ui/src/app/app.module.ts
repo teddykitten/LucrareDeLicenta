@@ -17,27 +17,23 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {LoginComponent} from "./login/login.component";
-import {AdminComponent} from "./admin/admin.component";
-import {UserComponent} from "./user/user.component";
-import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {RouterModule} from "@angular/router";
 import {ActorService} from "./_service/actor-service";
 import {MovieService} from "./_service/movie-service";
+import {HeaderComponent} from "./header/header.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    AdminComponent,
-    UserComponent,
-    ForbiddenComponent,
-    ActorAddComponent,
-    MovieListComponent,
-    MovieAddComponent,
-    ActorDetailsComponent,
-    ActorListComponent,
-    MovieDetailsComponent,
-  ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        ActorAddComponent,
+        MovieListComponent,
+        MovieAddComponent,
+        ActorDetailsComponent,
+        ActorListComponent,
+        MovieDetailsComponent,
+        HeaderComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

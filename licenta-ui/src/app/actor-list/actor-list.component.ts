@@ -5,6 +5,7 @@ import {map} from "rxjs/operators";
 import {ImageProcessingService} from ".././_service/image-processing.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ActorDetailsComponent} from "../actor-details/actor-details.component";
+import {UserService} from "../_service/user.service";
 
 @Component({
   selector: 'app-actor-list',
@@ -19,7 +20,8 @@ export class ActorListComponent implements OnInit {
   name = '';
 
   constructor(private actorService: ActorService,
-              private imageProcessingService: ImageProcessingService) {
+              private imageProcessingService: ImageProcessingService,
+              public userService: UserService) {
 
   }
 

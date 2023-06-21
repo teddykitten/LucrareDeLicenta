@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Movie} from "../model/movie";
-import {MovieService} from ".././_service/movie-service";
+import {MovieService} from "../_service/movie-service";
+import {UserService} from "../_service/user.service";
 
 @Component({
   selector: 'app-movie-list',
@@ -10,11 +11,19 @@ import {MovieService} from ".././_service/movie-service";
 export class MovieListComponent implements OnInit {
 
   movies?: Movie[];
-  currentMovie: Movie = {ageRestricted: "", description: "", duration: undefined, genre: "", rating: undefined, name: ""};
+  currentMovie: Movie = {
+    ageRestricted: "",
+    description: "",
+    duration: undefined,
+    genre: "",
+    rating: undefined,
+    name: ""
+  };
   currentIndex = -1;
   name = '';
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService,
+              public userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -34,7 +43,14 @@ export class MovieListComponent implements OnInit {
 
   refreshList(): void {
     this.retrieveMovie();
-    this.currentMovie = {ageRestricted: "", description: "", duration: undefined, genre: "", rating: undefined, name: ""};
+    this.currentMovie = {
+      ageRestricted: "",
+      description: "",
+      duration: undefined,
+      genre: "",
+      rating: undefined,
+      name: ""
+    };
     this.currentIndex = -1;
   }
 
@@ -44,7 +60,14 @@ export class MovieListComponent implements OnInit {
   }
 
   searchName(): void {
-    this.currentMovie = {ageRestricted: "", description: "", duration: undefined, genre: "", rating: undefined, name: ""};
+    this.currentMovie = {
+      ageRestricted: "",
+      description: "",
+      duration: undefined,
+      genre: "",
+      rating: undefined,
+      name: ""
+    };
     this.currentIndex = -1;
 
     this.movieService.findByName(this.name)

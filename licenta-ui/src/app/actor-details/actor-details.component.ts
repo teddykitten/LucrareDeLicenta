@@ -5,6 +5,7 @@ import {Actor} from "../model/actor";
 import {ImageProcessingService} from ".././_service/image-processing.service";
 import {map} from "rxjs/operators";
 import {FileHandle} from "../model/file-handler";
+import {UserService} from "../_service/user.service";
 
 @Component({
   selector: 'app-actor-details',
