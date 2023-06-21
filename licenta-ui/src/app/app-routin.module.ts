@@ -7,17 +7,19 @@ import {MovieAddComponent} from "./movie-add/movie-add.component";
 import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 import {MovieDetailsComponent} from "./movie-details/movie-details.component";
 import {LoginComponent} from "./login/login.component";
+import {HallAddComponent} from "./hall-add/hall-add.component";
 
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
   {path: 'actor', component: ActorListComponent},
   {path: 'actor/:id', component: ActorDetailsComponent},
+  {path: 'actor-add', component: ActorAddComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'hall', component: HallAddComponent},
   {path: 'movie', component: MovieListComponent},
   {path: 'movie-add', component: MovieAddComponent},
-  {path: 'movie/:id', component: MovieDetailsComponent},
-  {path: 'actor-add', component: ActorAddComponent}
+  {path: 'movie/:id', component: MovieDetailsComponent}
 ];
 
 @NgModule({

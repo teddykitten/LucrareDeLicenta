@@ -21,19 +21,21 @@ import {RouterModule} from "@angular/router";
 import {ActorService} from "./_service/actor-service";
 import {MovieService} from "./_service/movie-service";
 import {HeaderComponent} from "./header/header.component";
+import {HallAddComponent} from "./hall-add/hall-add.component";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        ActorAddComponent,
-        MovieListComponent,
-        MovieAddComponent,
-        ActorDetailsComponent,
-        ActorListComponent,
-        MovieDetailsComponent,
-        HeaderComponent,
-    ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HallAddComponent,
+    ActorAddComponent,
+    MovieListComponent,
+    MovieAddComponent,
+    ActorDetailsComponent,
+    ActorListComponent,
+    MovieDetailsComponent,
+    HeaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

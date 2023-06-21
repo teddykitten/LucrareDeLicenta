@@ -40,19 +40,6 @@ public class HallController {
         }
     }
 
-    @PutMapping("/hall/{id}")
-    public ResponseEntity<Hall> updateHall(@PathVariable("id") long id, @RequestBody Hall hall) {
-        Optional<Hall> hallData = hallRepository.findById(id);
-
-        if (hallData.isPresent()) {
-            Hall hall1 = hallData.get();
-            hall1.setName(hall.getName());
-            return new ResponseEntity<>(hallRepository.save(hall1), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping("/hall/{id}")
     public ResponseEntity<Hall> getHallById(@PathVariable("id") long id) {
         Optional<Hall> hallData = hallRepository.findById(id);
@@ -60,7 +47,7 @@ public class HallController {
     }
 
     @GetMapping("/hall")
-    public ResponseEntity<List<Hall>> getAllActors(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<Hall>> getAllHalls(@RequestParam(required = false) String name) {
         try {
             List<Hall> halls = new ArrayList<>();
 
