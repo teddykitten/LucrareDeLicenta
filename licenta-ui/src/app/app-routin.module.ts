@@ -8,6 +8,8 @@ import {ActorDetailsComponent} from "./actor-details/actor-details.component";
 import {MovieDetailsComponent} from "./movie-details/movie-details.component";
 import {LoginComponent} from "./login/login.component";
 import {HallAddComponent} from "./hall-add/hall-add.component";
+import {HallListComponent} from "./hall-list/hall-list.component";
+import {HallDetailsComponent} from "./hall-details/hall-details.component";
 
 
 const routes: Routes = [
@@ -16,10 +18,12 @@ const routes: Routes = [
   {path: 'actor/:id', component: ActorDetailsComponent},
   {path: 'actor-add', component: ActorAddComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'hall', component: HallAddComponent},
   {path: 'movie', component: MovieListComponent},
   {path: 'movie-add', component: MovieAddComponent},
-  {path: 'movie/:id', component: MovieDetailsComponent}
+  {path: 'movie/:id', component: MovieDetailsComponent},
+  {path: 'hall', component: HallListComponent},
+  {path: 'hall/:id', component: HallDetailsComponent},
+  {path: 'hall-add', component: HallAddComponent}
 ];
 
 @NgModule({

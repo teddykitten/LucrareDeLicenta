@@ -22,6 +22,9 @@ import {ActorService} from "./_service/actor-service";
 import {MovieService} from "./_service/movie-service";
 import {HeaderComponent} from "./header/header.component";
 import {HallAddComponent} from "./hall-add/hall-add.component";
+import {HallListComponent} from "./hall-list/hall-list.component";
+import {HallService} from "./_service/hall-service";
+import {HallDetailsComponent} from "./hall-details/hall-details.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import {HallAddComponent} from "./hall-add/hall-add.component";
     ActorListComponent,
     MovieDetailsComponent,
     HeaderComponent,
+    HallListComponent,
+    HallDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,7 @@ import {HallAddComponent} from "./hall-add/hall-add.component";
     MatGridListModule,
     RouterModule
   ],
-  providers: [ActorService, MovieService],
+  providers: [ActorService, MovieService, HallService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

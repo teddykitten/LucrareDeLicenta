@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Movie} from '../model/movie';
-import {catchError, Observable, tap} from 'rxjs';
-import {map} from "rxjs/operators";
+import {Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/cinema/movie';
 

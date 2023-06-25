@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HallService} from "../_service/hall-service";
 
 @Component({
   selector: 'app-hall',
@@ -12,7 +13,8 @@ export class HallAddComponent implements OnInit {
   submitted = false;
   seats: { label: string, type: string, name: string }[] = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private hallService: HallService) {
   }
 
   ngOnInit() {
@@ -46,7 +48,6 @@ export class HallAddComponent implements OnInit {
 
   submitForm() {
     if (this.form.valid) {
-      // Handle form submission logic here
       console.log(this.form.value);
       this.submitted = true;
     }

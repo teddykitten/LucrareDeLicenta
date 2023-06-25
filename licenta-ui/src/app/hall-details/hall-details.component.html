@@ -1,0 +1,20 @@
+
+  <div *ngIf="currentHall.id">
+    <h4>Hall</h4>
+    <div>
+      <label><strong>Name:</strong></label> {{ currentHall.name }}
+    </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/hall/{{ currentHall.id }}"
+    >
+      <div class="button-container">
+        <button class="delete-button" (click)="deleteHall()">
+          Delete
+        </button>
+
+      </div>
+    </a>
+  </div>
+

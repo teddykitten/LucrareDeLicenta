@@ -22,24 +22,24 @@ public class HallController {
     @Autowired
     private SeatRepository seatRepository;
 
-    @PostMapping(path = "/hall")
-    public ResponseEntity<Hall> createHall(@RequestBody Hall hall) {
-        try {
-            Hall hall1 = hallRepository
-                    .save(hall);
-            return new ResponseEntity<>(hall1, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping(path = "/hall")
+//    public ResponseEntity<Hall> createHall(@RequestBody Hall hall) {
+//        try {
+//            Hall hall1 = hallRepository
+//                    .save(hall);
+//            return new ResponseEntity<>(hall1, HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
-    @GetMapping(path = "/insertDummyHall")
-    public ResponseEntity<Hall> createHall() {
+    @PostMapping(path = "/hall")
+    public ResponseEntity<Hall> createHall(@RequestBody String name, @RequestBody int seatRow, @RequestBody int seatNumber) {
         Hall hall = new Hall();
-        hall.setName("test");
+        hall.setName(name);
         Set<Seat> seats = new HashSet<>();
-        for (int r = 1; r <= 2; r++) {
-            for (int s = 1; s <= 3; s++) {
+        for (int r = 1; r <= seatRow; r++) {
+            for (int s = 1; s <= seatNumber; s++) {
                 seats.add(new Seat(r, s));
             }
         }

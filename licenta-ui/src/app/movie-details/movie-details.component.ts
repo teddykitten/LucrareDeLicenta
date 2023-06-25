@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Movie} from "../model/movie";
-import {MovieService} from ".././_service/movie-service";
+import {MovieService} from "../_service/movie-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReplaySubject, Subject, take, takeUntil} from "rxjs";
 import {MatSelect} from "@angular/material/select";
 import {UntypedFormControl} from "@angular/forms";
+import {Movie} from "../model/movie";
 
 export const GENRE = ["action", "drama", "romance", "horror", "comedy"];
 
