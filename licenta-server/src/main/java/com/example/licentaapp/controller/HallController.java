@@ -34,31 +34,42 @@ public class HallController {
 //    }
 
     @PostMapping(path = "/hall")
-    public ResponseEntity<Hall> createHall(@RequestBody String name, @RequestBody int seatRow, @RequestBody int seatNumber) {
+    public ResponseEntity<Hall> createHall(@RequestBody HallRequestBody hallRequestBody) {
         Hall hall = new Hall();
-        hall.setName(name);
         Set<Seat> seats = new HashSet<>();
-        for (int r = 1; r <= seatRow; r++) {
-            for (int s = 1; s <= seatNumber; s++) {
+        hall.setName(hallRequestBody.getName());
+        for (int r = 0; r < hallRequestBody.getRows().size(); r++) {
+            for (int s = 1; s <= hallRequestBody.getRows().get(r).getSeat(); s++) {
                 seats.add(new Seat(r, s));
             }
         }
         Set<Seat> collect = seats.stream().map(seat -> seatRepository.save(seat)).collect(Collectors.toSet());
         hall.setSeats(collect);
-        Hall hall1 = hallRepository.save(hall);
-        return new ResponseEntity<>(hall1, HttpStatus.CREATED);
+        Hall hallResult = hallRepository.save(hall);
+        return new ResponseEntity<>(hallResult, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/insertDummyHall/{id}")
-    public ResponseEntity<Map<String, Object>> listHall(@PathVariable("id") long id) {
+    @GetMapping(path = "/hall/{id}")
+    public ResponseEntity<HallRequestBody> listHall(@PathVariable("id") long id) {
         Hall hall = hallRepository.getReferenceById(id);
-        Map<String, Object> response = new HashMap<>();
-        response.put("name", hall.getName());
-        response.put("rows", hall.getSeats().stream().map(Seat::getSeatRow).distinct().count());
-        Map<Integer, Long> collect1 = hall.getSeats().stream().collect(Collectors.groupingBy(Seat::getSeatRow,
+        HallRequestBody hallRequestBody = toHallRequestBody(hall);
+        return new ResponseEntity<>(hallRequestBody, HttpStatus.CREATED);
+    }
+
+    private HallRequestBody toHallRequestBody(Hall hall){
+        HallRequestBody hallRequestBody = new HallRequestBody();
+        hallRequestBody.setName(hall.getName());
+        hallRequestBody.setId(hall.getId());
+        List<HallRequestBody.Row> rows = new ArrayList<>();
+        Map<Integer, Long> seats = hall.getSeats().stream().collect(Collectors.groupingBy(Seat::getSeatRow,
                 Collectors.counting()));
-        response.put("seats", collect1);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        for (int r = 1; r <= hall.getSeats().stream().map(Seat::getSeatRow).distinct().count(); r++){
+            HallRequestBody.Row row = new HallRequestBody.Row();
+            row.setSeat(seats.get(r).intValue());
+            rows.add(row);
+        }
+        hallRequestBody.setRows(rows);
+        return hallRequestBody;
     }
 
     @DeleteMapping("/hall/{id}")
@@ -71,14 +82,9 @@ public class HallController {
         }
     }
 
-    @GetMapping("/hall/{id}")
-    public ResponseEntity<Hall> getHallById(@PathVariable("id") long id) {
-        Optional<Hall> hallData = hallRepository.findById(id);
-        return hallData.map(hall -> new ResponseEntity<>(hall, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
 
     @GetMapping("/hall")
-    public ResponseEntity<List<Hall>> getAllHalls(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<HallRequestBody>> getAllHalls(@RequestParam(required = false) String name) {
         try {
             List<Hall> halls = new ArrayList<>();
 
@@ -91,7 +97,7 @@ public class HallController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(halls, HttpStatus.OK);
+            return new ResponseEntity<>(halls.stream().map(this::toHallRequestBody).collect(Collectors.toList()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

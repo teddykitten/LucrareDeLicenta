@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HallService} from "../_service/hall-service";
+import {Hall} from "../model/hall";
 
 @Component({
   selector: 'app-hall',
@@ -8,48 +9,55 @@ import {HallService} from "../_service/hall-service";
   styleUrls: ['./hall-add.component.css']
 })
 export class HallAddComponent implements OnInit {
-  form: FormGroup;
-  currentStep = 1;
+  rowsForm: FormGroup;
   submitted = false;
-  seats: { label: string, type: string, name: string }[] = [];
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private fb: FormBuilder,
               private hallService: HallService) {
-  }
 
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      rowNumber: ['', Validators.required]
+    this.rowsForm = this.fb.group({
+      name: '',
+      rows: this.fb.array([]),
     });
+
   }
 
-  nextStep() {
-    if (this.form.valid) {
-      this.generateFields();
-      this.currentStep++;
+  ngOnInit(): void {
+  }
+
+  get rows(): FormArray {
+    return this.rowsForm.get("rows") as FormArray
+  }
+
+  newRow(): FormGroup {
+    return this.fb.group({
+      seat: '',
+      // number: '',
+    })
+  }
+
+  addRows() {
+    this.rows.push(this.newRow());
+  }
+
+  removeRows(i: number) {
+    this.rows.removeAt(i);
+  }
+
+  onSubmit(): void {
+    console.log(this.rowsForm.value)
+    const data = {
+      name: this.rowsForm.get("name")?.value,
+      rows: this.rowsForm.get("rows")?.value
     }
-  }
-
-  generateFields() {
-    const rowNumber = this.form.get('rowNumber')!.value;
-    this.seats = [];
-    for (let i = 1; i <= rowNumber; i++) {
-      const fieldName = `row${i}`;
-      this.seats.push({
-        label: `Row ${i}`,
-        type: 'text',
-        name: fieldName
+    console.log(data)
+    this.hallService.create(data)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.submitted = true;
+        },
+        error: (e) => console.error(e)
       });
-
-      this.form.addControl(fieldName, this.formBuilder.control(''));
-    }
-  }
-
-  submitForm() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-      this.submitted = true;
-    }
   }
 }

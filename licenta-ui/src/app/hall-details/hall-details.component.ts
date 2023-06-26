@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Hall} from "../model/hall";
 import {HallService} from "../_service/hall-service";
+import {Row} from "../model/row";
 
 @Component({
   selector: 'app-hall-details',
@@ -12,7 +13,8 @@ export class HallDetailsComponent implements OnInit {
   @Input() viewMode = false;
 
   @Input() currentHall: Hall = {
-    name: '',
+    rows: [],
+    name: ''
   };
 
   message = '';

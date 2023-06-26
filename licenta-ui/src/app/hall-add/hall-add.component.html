@@ -1,31 +1,34 @@
-<!-- form-pages.component.html -->
-<div>
-  <div class="submit-form">
-    <form [formGroup]="form" *ngIf="currentStep === 1">
-      <h3>Hall name and the numbers of rows</h3>
-      <div class="form-group">
-        Name:
-        <input type="text" class="form-control" formControlName="name"/>
-      </div>
-      <label>
-        Number of Rows:
-        <input type="number" class="form-control" formControlName="rowNumber"/>
-      </label>
-      <button (click)="nextStep()" class="next">Next</button>
-    </form>
+<form [formGroup]="rowsForm" (ngSubmit)="onSubmit()">
 
-    <form [formGroup]="form" *ngIf="currentStep === 2">
-      <h3>Number of seats for each row</h3>
-      <div class="form-group">
-        <ng-container *ngFor="let seat of seats">
-          {{ seat.label }}:
-          <input [type]="seat.type" class="form-control" [formControlName]="seat.name"/>
-        </ng-container>
+  <p>
+    <label for="name">Name </label>
+    <input type="text" id="name" name="name" formControlName="name">
+  </p>
+
+
+  <div formArrayName="rows">
+    <div *ngFor="let row of rows.controls; let i=index">
+      <div [formGroupName]="i">
+        Row {{i}}
+        Number of seats :
+        <input type="text" formControlName="seat">
+<!--        number:-->
+<!--        <input type="text" formControlName="number">-->
+
+        <button (click)="removeRows(i)">Remove</button>
       </div>
-      <button (click)="submitForm()" class="btn-submit">Submit</button>
-      <div *ngIf="submitted">
-        <h4>Hall was submitted successfully!</h4>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
+
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+
+</form>
+
+
+<p>
+  <button type="button" (click)="addRows()">Add</button>
+</p>
+
+{{this.rowsForm.value | json}}

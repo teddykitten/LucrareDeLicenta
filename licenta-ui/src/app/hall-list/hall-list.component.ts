@@ -12,6 +12,7 @@ export class HallListComponent implements OnInit {
 
   halls?: Hall[];
   currentHall: Hall = {
+    rows: [],
     name: ""
 
   };
@@ -40,18 +41,21 @@ export class HallListComponent implements OnInit {
   refreshList(): void {
     this.retrieveHall();
     this.currentHall = {
+      rows:[],
       name: ""
     };
     this.currentIndex = -1;
   }
 
   setActiveHall(hall: Hall, index: number): void {
+    console.log(hall)
     this.currentHall = hall;
     this.currentIndex = index;
   }
 
   searchName(): void {
     this.currentHall = {
+      rows: [],
       name: ""
     };
     this.currentIndex = -1;

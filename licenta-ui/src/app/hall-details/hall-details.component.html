@@ -1,8 +1,17 @@
 
   <div *ngIf="currentHall.id">
     <h4>Hall</h4>
+
     <div>
-      <label><strong>Name:</strong></label> {{ currentHall.name }}
+      <h4>{{currentHall.name}}</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let row of currentHall.rows; let i = index">
+          Randul {{ i+1 }}:
+          <b *ngFor="let seat of [].constructor(row.seat); let s = index" >
+            {{s+1}}
+          </b>
+        </li>
+      </ul>
     </div>
 
     <a
