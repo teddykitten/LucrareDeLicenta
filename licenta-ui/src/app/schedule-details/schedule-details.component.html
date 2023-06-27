@@ -1,0 +1,65 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentSchedule.id">
+    <h4>Schedule</h4>
+    <div>
+      <label><strong>Date:</strong></label> {{ currentSchedule.date }}
+    </div>
+    <div>
+      <label><strong>Movie:</strong></label> {{ currentSchedule.movie }}
+    </div>
+    <div>
+      <label><strong>Hall:</strong></label> {{ currentSchedule.hall }}
+    </div>
+
+
+    <a
+      class="badge badge-warning"
+      routerLink="/schedule/{{ currentSchedule.id }}"
+    >
+      <button type="button" class="btn btn-primary">Edit</button>
+    </a>
+  </div>
+
+  <div *ngIf="!currentSchedule">
+    <br/>
+    <p>Please click on an Schedule...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentSchedule.id" class="edit-form">
+    <h4>Schedule</h4>
+    <form>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input
+          type="text"
+          class="form-control"
+          id="date"
+          [(ngModel)]="currentSchedule.date"
+          name="date"
+        />
+      </div>
+    </form>
+
+    <div class="button-container">
+      <button class="delete-button" (click)="deleteSchedule()">
+        Delete
+      </button>
+
+      <button
+        type="submit"
+        class="edit-button"
+        (click)="updateSchedule()"
+      >
+        Update
+      </button>
+    </div>
+    <p>{{ message }}</p>
+  </div>
+  <button (click)="goBack()" class="btn-back">Back</button>
+  <div *ngIf="!currentSchedule.id">
+    <br/>
+    <p>Cannot access this schedule...</p>
+  </div>
+</ng-template>

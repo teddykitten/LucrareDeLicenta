@@ -10,6 +10,8 @@ import {LoginComponent} from "./login/login.component";
 import {HallAddComponent} from "./hall-add/hall-add.component";
 import {HallListComponent} from "./hall-list/hall-list.component";
 import {HallDetailsComponent} from "./hall-details/hall-details.component";
+import {ScheduleAddComponent} from "./schedule-add/schedule-add.component";
+import {ScheduleListComponent} from "./schedule-list/schedule-list.component";
 
 
 const routes: Routes = [
@@ -23,7 +25,10 @@ const routes: Routes = [
   {path: 'movie/:id', component: MovieDetailsComponent},
   {path: 'hall', component: HallListComponent},
   {path: 'hall/:id', component: HallDetailsComponent},
-  {path: 'hall-add', component: HallAddComponent}
+  {path: 'hall-add', component: HallAddComponent},
+  {path: 'schedule-add', component: ScheduleAddComponent},
+  {path: 'schedule', component: ScheduleListComponent},
+  {path: 'schedule/:id', component: ScheduleListComponent}
 ];
 
 @NgModule({

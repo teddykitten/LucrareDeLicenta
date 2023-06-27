@@ -38,8 +38,8 @@ public class HallController {
         Hall hall = new Hall();
         Set<Seat> seats = new HashSet<>();
         hall.setName(hallRequestBody.getName());
-        for (int r = 0; r < hallRequestBody.getRows().size(); r++) {
-            for (int s = 1; s <= hallRequestBody.getRows().get(r).getSeat(); s++) {
+        for (int r = 1; r <= hallRequestBody.getRows().size(); r++) {
+            for (int s = 1; s <= hallRequestBody.getRows().get(r-1).getSeat(); s++) {
                 seats.add(new Seat(r, s));
             }
         }

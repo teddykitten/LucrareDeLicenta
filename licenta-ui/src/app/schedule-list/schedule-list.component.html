@@ -1,0 +1,26 @@
+<div class="list row">
+  <div class>
+    <span>
+      <a routerLink="/schedule-add" *ngIf="userService.roleMatch(['Admin'])" class="button-add">Add</a>
+    </span>
+  </div>
+  <div class="col-md-6">
+    <h4>Schedule</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let schedule of schedules; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveSchedule(schedule, i)"
+      >
+        {{ schedule.date }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <app-schedule-details
+      [viewMode]="true"
+      [currentSchedule]="currentSchedule"
+    ></app-schedule-details>
+  </div>
+</div>

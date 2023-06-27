@@ -25,6 +25,9 @@ import {HallAddComponent} from "./hall-add/hall-add.component";
 import {HallListComponent} from "./hall-list/hall-list.component";
 import {HallService} from "./_service/hall-service";
 import {HallDetailsComponent} from "./hall-details/hall-details.component";
+import {ScheduleAddComponent} from "./schedule-add/schedule-add.component";
+import {ScheduleListComponent} from "./schedule-list/schedule-list.component";
+import {ScheduleDetailsComponent} from "./schedule-details/schedule-details.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import {HallDetailsComponent} from "./hall-details/hall-details.component";
     MovieDetailsComponent,
     HeaderComponent,
     HallListComponent,
-    HallDetailsComponent
+    HallDetailsComponent,
+    ScheduleAddComponent,
+    ScheduleListComponent,
+    ScheduleDetailsComponent
   ],
   imports: [
     BrowserModule,

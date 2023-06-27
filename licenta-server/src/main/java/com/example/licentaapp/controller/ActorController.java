@@ -35,7 +35,7 @@ public class ActorController {
         }
     }
 
-    public Set<Image> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+    private Set<Image> uploadImage(MultipartFile[] multipartFiles) throws IOException {
         Set<Image> images = new HashSet<>();
         for (MultipartFile file : multipartFiles) {
             Image image = new Image(
