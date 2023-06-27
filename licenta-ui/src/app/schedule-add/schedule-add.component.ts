@@ -45,6 +45,7 @@ export class ScheduleAddComponent {
       hall: this.schedule.hall,
       movie: this.schedule.movie
     };
+    console.log(data)
     this.scheduleService.create(data)
       .subscribe({
         next: (res) => {
@@ -59,8 +60,7 @@ export class ScheduleAddComponent {
     window.history.back();
   }
 
-  newSchedule()
-    :
+  newSchedule():
     void {
     this.submitted = false;
     this.schedule = {

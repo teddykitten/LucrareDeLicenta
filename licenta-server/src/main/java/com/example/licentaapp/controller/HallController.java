@@ -39,7 +39,7 @@ public class HallController {
         Set<Seat> seats = new HashSet<>();
         hall.setName(hallRequestBody.getName());
         for (int r = 1; r <= hallRequestBody.getRows().size(); r++) {
-            for (int s = 1; s <= hallRequestBody.getRows().get(r-1).getSeat(); s++) {
+            for (int s = 1; s <= hallRequestBody.getRows().get(r - 1).getSeat(); s++) {
                 seats.add(new Seat(r, s));
             }
         }
@@ -56,14 +56,14 @@ public class HallController {
         return new ResponseEntity<>(hallRequestBody, HttpStatus.CREATED);
     }
 
-    private HallRequestBody toHallRequestBody(Hall hall){
+    private HallRequestBody toHallRequestBody(Hall hall) {
         HallRequestBody hallRequestBody = new HallRequestBody();
         hallRequestBody.setName(hall.getName());
         hallRequestBody.setId(hall.getId());
         List<HallRequestBody.Row> rows = new ArrayList<>();
         Map<Integer, Long> seats = hall.getSeats().stream().collect(Collectors.groupingBy(Seat::getSeatRow,
                 Collectors.counting()));
-        for (int r = 1; r <= hall.getSeats().stream().map(Seat::getSeatRow).distinct().count(); r++){
+        for (int r = 1; r <= hall.getSeats().stream().map(Seat::getSeatRow).distinct().count(); r++) {
             HallRequestBody.Row row = new HallRequestBody.Row();
             row.setSeat(seats.get(r).intValue());
             rows.add(row);

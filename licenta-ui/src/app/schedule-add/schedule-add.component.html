@@ -1,52 +1,48 @@
 <div>
   <div class="submit-form">
-    <div *ngIf="!submitted">
 
-      <div class="form-group">
-        <label for="date">Date</label>
-        <input
-          class="form-control"
-          id="date"
-          required
-          [(ngModel)]="schedule.date"
-          name="date"
-        />
-      </div>
-      <div class="row">
-        <div class="col-md-2"> <label>Movie</label></div>
-        <div class="col-md-9">
-          <div class="input-space">
-            <select formControlName="movie">
-              <option *ngFor="let movie of movies; let i = index" [ngValue]="movie.id">
-                {{movie.name}}
-              </option>
-            </select>
-          </div>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker2">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 color="primary"></mat-datepicker>
+    </mat-form-field>
+
+    <div class="row">
+      <div class="col-md-2"><label>Movie</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <select formControlName="movie">
+            <option *ngFor="let movie of movies; let i = index" [ngValue]="movie.id">
+              {{movie.name}}
+            </option>
+          </select>
+
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"> <label>Hall</label></div>
-        <div class="col-md-9">
-          <div class="input-space">
-            <select formControlName="movie">
-              <option *ngFor="let hall of halls; let i = index" [ngValue]="hall.id">
-                {{hall.name}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="space">
-        <button (click)="saveSchedule()" class="btn-submit">Submit</button>
-        <button (click)="goBack()" class="btn-back">Back</button>
       </div>
     </div>
-    <div *ngIf="submitted">
-      <h4>Schedule was submitted successfully!</h4>
-      <button class="btn-submit" (click)="newSchedule()">Add</button>
+    <div class="row">
+      <div class="col-md-2"><label>Hall</label></div>
+      <div class="col-md-9">
+        <div class="input-space">
+          <select formControlName="movie">
+            <option *ngFor="let hall of halls; let i = index" [ngValue]="hall.id">
+              {{hall.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="space">
+      <button (click)="saveSchedule()" class="btn-submit">Submit</button>
       <button (click)="goBack()" class="btn-back">Back</button>
     </div>
   </div>
+  <div *ngIf="submitted">
+    <h4>Schedule was submitted successfully!</h4>
+    <button class="btn-submit" (click)="newSchedule()">Add</button>
+    <button (click)="goBack()" class="btn-back">Back</button>
+  </div>
 </div>
+
+
