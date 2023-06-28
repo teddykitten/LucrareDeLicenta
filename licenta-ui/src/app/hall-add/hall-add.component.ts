@@ -32,7 +32,6 @@ export class HallAddComponent implements OnInit {
   newRow(): FormGroup {
     return this.fb.group({
       seat: '',
-      // number: '',
     })
   }
 
@@ -44,6 +43,9 @@ export class HallAddComponent implements OnInit {
     this.rows.removeAt(i);
   }
 
+  goBack() {
+    window.history.back();
+  }
   onSubmit(): void {
     console.log(this.rowsForm.value)
     const data = {

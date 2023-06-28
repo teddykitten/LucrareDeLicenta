@@ -22,16 +22,6 @@ public class HallController {
     @Autowired
     private SeatRepository seatRepository;
 
-//    @PostMapping(path = "/hall")
-//    public ResponseEntity<Hall> createHall(@RequestBody Hall hall) {
-//        try {
-//            Hall hall1 = hallRepository
-//                    .save(hall);
-//            return new ResponseEntity<>(hall1, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 
     @PostMapping(path = "/hall")
     public ResponseEntity<Hall> createHall(@RequestBody HallRequestBody hallRequestBody) {

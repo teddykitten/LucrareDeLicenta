@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActorService} from ".././_service/actor-service";
+import {ActorService} from "../_service/actor-service";
 import {Actor} from "../model/actor";
 import {map} from "rxjs/operators";
-import {ImageProcessingService} from ".././_service/image-processing.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import {ActorDetailsComponent} from "../actor-details/actor-details.component";
+import {ImageProcessingService} from "../_service/image-processing.service";
 import {UserService} from "../_service/user.service";
 
 @Component({

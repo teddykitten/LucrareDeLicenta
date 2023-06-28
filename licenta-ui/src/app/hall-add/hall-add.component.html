@@ -1,34 +1,41 @@
 <form [formGroup]="rowsForm" (ngSubmit)="onSubmit()">
 
-  <p>
+  <div class="submit-form">
     <label for="name">Name </label>
-    <input type="text" id="name" name="name" formControlName="name">
-  </p>
+    <input
+      class="form-control"
+      id="name"
+      name="name"
+    />
 
 
-  <div formArrayName="rows">
-    <div *ngFor="let row of rows.controls; let i=index">
-      <div [formGroupName]="i">
-        Row {{i}}
-        Number of seats :
-        <input type="text" formControlName="seat">
-<!--        number:-->
-<!--        <input type="text" formControlName="number">-->
+    <div formArrayName="rows">
+      <div *ngFor="let row of rows.controls; let i=index">
+        <div [formGroupName]="i">
+          Row {{i + 1}}
+          Number of seats :
+          <label for="name">Seats </label>
+          <input
+            class="form-control"
+            id="Seats"
+            name="Seats"
+          />
 
-        <button (click)="removeRows(i)">Remove</button>
+          <button (click)="removeRows(i)" class="remove">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="space">
+      <p>
+        <button (click)="addRows()" class="bn3">Add</button>
+      </p>
+      <button type="submit" class="btn-submit">Submit</button>
+      <div *ngIf="submitted">
+        <h4>Hall was submitted successfully!</h4>
+        <button (click)="goBack()" class="btn-back">Back</button>
       </div>
     </div>
   </div>
-
-  <p>
-    <button type="submit">Submit</button>
-  </p>
-
 </form>
 
-
-<p>
-  <button type="button" (click)="addRows()">Add</button>
-</p>
-
-{{this.rowsForm.value | json}}
