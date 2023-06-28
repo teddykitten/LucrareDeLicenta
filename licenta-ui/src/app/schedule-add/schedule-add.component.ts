@@ -5,6 +5,7 @@ import {Movie} from "../model/movie";
 import {ScheduleService} from "../_service/schedule-service";
 import {MovieService} from "../_service/movie-service";
 import {HallService} from "../_service/hall-service";
+import {FormControl, FormGroup, UntypedFormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-schedule-add',
@@ -18,7 +19,10 @@ export class ScheduleAddComponent {
   movies: Movie[]
   halls: Hall[]
   submitted = false;
-
+  selectedMovie: any;
+  selectedHall: any;
+  date: UntypedFormControl = new UntypedFormControl();
+  time: UntypedFormControl = new UntypedFormControl();
   constructor(public scheduleService: ScheduleService,
               public movieService: MovieService,
               public hallService: HallService) {
@@ -41,9 +45,10 @@ export class ScheduleAddComponent {
 
   saveSchedule(): void {
     const data = {
-      date: this.schedule.date,
-      hall: this.schedule.hall,
-      movie: this.schedule.movie
+      time: this.time.value,
+      date: this.date.value.toISOString().substring(0, 10),
+      hall: this.selectedHall,
+      movie: this.selectedMovie
     };
     console.log(data)
     this.scheduleService.create(data)

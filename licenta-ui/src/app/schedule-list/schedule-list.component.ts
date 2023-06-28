@@ -30,6 +30,7 @@ export class ScheduleListComponent implements OnInit {
   }
 
   retrieveSchedule(): void {
+    console.log(this.schedules)
     this.scheduleService.findAll()
       .subscribe({
         next: (data) => {

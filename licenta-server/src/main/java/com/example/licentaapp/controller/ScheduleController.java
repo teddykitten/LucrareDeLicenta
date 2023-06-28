@@ -1,13 +1,21 @@
 package com.example.licentaapp.controller;
 
+import com.example.licentaapp.repository.HallRepository;
+import com.example.licentaapp.repository.MovieRepository;
 import com.example.licentaapp.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ucv.ro.catalina.ilie.licenta.model.Hall;
+import ucv.ro.catalina.ilie.licenta.model.Movie;
 import ucv.ro.catalina.ilie.licenta.model.Schedule;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,16 +25,23 @@ import java.util.Optional;
 public class ScheduleController {
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private HallRepository hallRepository;
 
     @PostMapping(path = "/schedule")
-    public ResponseEntity<Schedule> createSchedule(@RequestBody Schedule schedule) {
-        try {
-            Schedule scheduleResult = scheduleRepository
-                    .save(schedule);
-            return new ResponseEntity<>(scheduleResult, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Schedule> createSchedule(@RequestBody ScheduleRequestBody scheduleRequestBody) {
+        Schedule schedule = new Schedule();
+        schedule.setMovie(movieRepository.findById(scheduleRequestBody.getMovie()).get());
+        schedule.setHall(hallRepository.findById(scheduleRequestBody.getHall()).get());
+        String date = scheduleRequestBody.getDate();
+        String time = scheduleRequestBody.getTime();
+        LocalDateTime localDateTime = LocalDateTime.parse(date + time, DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm"));
+        schedule.setDate(localDateTime);
+        Schedule scheduleResult = scheduleRepository.save(schedule);
+        return new ResponseEntity<>(scheduleResult, HttpStatus.CREATED);
+
     }
 
     @DeleteMapping("/schedule/{id}")
@@ -36,21 +51,6 @@ public class ScheduleController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping("/schedule/{id}")
-    public ResponseEntity<Schedule> updateSchedule(@PathVariable("id") long id, @RequestBody Schedule schedule) {
-        Optional<Schedule> scheduleData = scheduleRepository.findById(id);
-
-        if (scheduleData.isPresent()) {
-            Schedule scheduleResult = scheduleData.get();
-            scheduleResult.setDate(schedule.getDate());
-            scheduleResult.setHall(schedule.getHall());
-            scheduleResult.setMovie(schedule.getMovie());
-            return new ResponseEntity<>(scheduleRepository.save(scheduleResult), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

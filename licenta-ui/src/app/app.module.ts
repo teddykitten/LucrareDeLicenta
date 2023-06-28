@@ -28,6 +28,11 @@ import {HallDetailsComponent} from "./hall-details/hall-details.component";
 import {ScheduleAddComponent} from "./schedule-add/schedule-add.component";
 import {ScheduleListComponent} from "./schedule-list/schedule-list.component";
 import {ScheduleDetailsComponent} from "./schedule-details/schedule-details.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 
 @NgModule({
   declarations: [
@@ -59,9 +64,12 @@ import {ScheduleDetailsComponent} from "./schedule-details/schedule-details.comp
     NgxMatSelectSearchModule,
     MatIconModule,
     MatGridListModule,
-    RouterModule
+    RouterModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
-  providers: [ActorService, MovieService, HallService],
+  providers: [ActorService, MovieService, HallService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {
