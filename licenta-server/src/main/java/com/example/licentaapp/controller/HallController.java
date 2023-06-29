@@ -13,6 +13,8 @@ import ucv.ro.catalina.ilie.licenta.model.Seat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.example.licentaapp.controller.HallRequestBody.toHallRequestBody;
+
 
 @Controller
 @RequestMapping(path = "/cinema")
@@ -46,22 +48,6 @@ public class HallController {
         return new ResponseEntity<>(hallRequestBody, HttpStatus.CREATED);
     }
 
-    private HallRequestBody toHallRequestBody(Hall hall) {
-        HallRequestBody hallRequestBody = new HallRequestBody();
-        hallRequestBody.setName(hall.getName());
-        hallRequestBody.setId(hall.getId());
-        List<HallRequestBody.Row> rows = new ArrayList<>();
-        Map<Integer, Long> seats = hall.getSeats().stream().collect(Collectors.groupingBy(Seat::getSeatRow,
-                Collectors.counting()));
-        for (int r = 1; r <= hall.getSeats().stream().map(Seat::getSeatRow).distinct().count(); r++) {
-            HallRequestBody.Row row = new HallRequestBody.Row();
-            row.setSeat(seats.get(r).intValue());
-            rows.add(row);
-        }
-        hallRequestBody.setRows(rows);
-        return hallRequestBody;
-    }
-
     @DeleteMapping("/hall/{id}")
     public ResponseEntity<HttpStatus> deleteHall(@PathVariable("id") long id) {
         try {
@@ -87,7 +73,7 @@ public class HallController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(halls.stream().map(this::toHallRequestBody).collect(Collectors.toList()), HttpStatus.OK);
+            return new ResponseEntity<>(halls.stream().map(hall -> toHallRequestBody(hall)).collect(Collectors.toList()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

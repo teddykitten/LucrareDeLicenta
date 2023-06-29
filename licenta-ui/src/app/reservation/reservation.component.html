@@ -6,26 +6,44 @@
     <ul class="list-group">
       <li
         class="list-group-item"
-        *ngFor="let schedule of schedules; let i = index"
+        *ngFor="let extendedSchedule of extendedSchedule; let i = index"
         [class.active]="i == currentIndex"
-        (click)="setActiveSchedule(schedule, i)"
+        (click)="setActiveSchedule(extendedSchedule, i)"
       >
-        {{ schedule.movie.name }}
-        {{schedule.date}}
+        {{ extendedSchedule.schedule.movie.name }}
+        {{extendedSchedule.schedule.date}}
       </li>
     </ul>
   </div>
-  <div *ngIf="currentSchedule.id">
-    <div>
-      <h4>{{currentSchedule.hall.rows}}</h4>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let row of currentSchedule.hall.rows; let i = index">
-          Randul {{ i+1 }}:
-          <b *ngFor="let seat of [].constructor(currentSchedule.hall.rows[i].seat); let s = index" >
-            {{s+1}}
-          </b>
-        </li>
-      </ul>
+  <form>
+    <div *ngIf="currentExtendedSchedule.schedule.id">
+      <div class="form-group">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let row of currentExtendedSchedule.hallRequestBody.rows; let i = index">
+            Randul {{ i + 1 }}:
+            <mat-button-toggle-group name="seat" aria-label="Seats" multiple [(ngModel)]="reservation.seats[i]">
+              <mat-button-toggle
+                *ngFor="let seat of [].constructor(currentExtendedSchedule.hallRequestBody.rows[i].seat); let s = index"
+                value="{{i+1}},{{s+1}}" [disabled]="currentExtendedSchedule.seats.includes((i+1) + ',' + (s+1))">
+                {{s + 1}}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          class="form-control"
+          id="email"
+          required
+          [(ngModel)]="reservation.email"
+          name="email"
+        />
+      </div>
+      <div class="space">
+        <button (click)=onSubmit() class="btn-submit">Submit</button>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

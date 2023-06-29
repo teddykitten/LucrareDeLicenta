@@ -1,10 +1,8 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,31 +11,41 @@ public class Reservation {
     @GeneratedValue
     private int id;
 
+    @ManyToOne
+    private Schedule schedule;
+    private String email;
     @OneToMany
-    private Set<Schedule> schedule;
-    private boolean active;
+    private List<SeatReserved> seatReserved;
 
     public int getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<SeatReserved> getSeatReserved() {
+        return seatReserved;
+    }
+
+    public void setSeatReserved(List<SeatReserved> seatReserved) {
+        this.seatReserved = seatReserved;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public Set<Schedule> getSchedule() {
+    public Schedule getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Set<Schedule> schedule) {
+    public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }

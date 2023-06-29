@@ -32,6 +32,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import { MatNativeDateModule } from '@angular/material/core';
 import {ReservationComponent} from "./reservation/reservation.component";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 
 
@@ -69,7 +70,8 @@ import {ReservationComponent} from "./reservation/reservation.component";
     RouterModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonToggleModule
   ],
   providers: [ActorService, MovieService, HallService,],
   bootstrap: [AppComponent]

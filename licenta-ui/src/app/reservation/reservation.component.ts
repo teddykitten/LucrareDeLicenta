@@ -4,47 +4,79 @@ import {Hall} from "../model/hall";
 import {Movie} from "../model/movie";
 import {ScheduleService} from "../_service/schedule-service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ExtendedSchedule} from "../model/extended-schedule";
+import {Reservation} from "../model/reservation";
+import {ReservationService} from "../_service/reservation-service";
+import {Seat} from "../model/seat";
 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css']
 })
-export class ReservationComponent implements OnInit{
+export class ReservationComponent implements OnInit {
   @Input() viewMode = false;
   @Input() currentHall: Hall = {
     rows: [],
     name: ''
   };
-  schedules?: Schedule[] = [];
-  currentSchedule: Schedule = {hall: new Hall, movie: new Movie, date: undefined};
+
+  extendedSchedule?: ExtendedSchedule[] = [];
+  reservation: Reservation = {
+    seats: [],
+    email: "",
+    schedule: new Schedule
+  };
+  currentExtendedSchedule: ExtendedSchedule = {
+    hallRequestBody: new Hall, schedule: new Schedule, seats: []
+  };
   currentIndex = -1;
   message = '';
+  submitted = false;
 
   constructor(
     private scheduleService: ScheduleService,
     private route: ActivatedRoute,
+    private reservationSerevice: ReservationService,
     private router: Router) {
   }
 
   ngOnInit(): void {
     this.retrieveSchedule();
   }
+
   retrieveSchedule(): void {
-    console.log(this.schedules)
-    this.scheduleService.findAll()
+    this.scheduleService.findAllExtended()
       .subscribe({
         next: (data) => {
-          this.schedules = data;
+          this.extendedSchedule = data;
           console.log(data);
         },
         error: (e) => console.error(e)
       });
   }
-  setActiveSchedule(schedule: Schedule, index: number): void {
-    this.currentSchedule = schedule;
+
+  setActiveSchedule(extendedSchedule: ExtendedSchedule, index: number): void {
+    this.currentExtendedSchedule = extendedSchedule;
     this.currentIndex = index;
-    console.log("active schedule", this.currentSchedule)
+    console.log(this.currentExtendedSchedule.seats)
+    console.log("active schedule", this.currentExtendedSchedule)
   }
 
+  onSubmit(): void {
+    const data = {
+      email: this.reservation.email,
+      scheduleId: this.currentExtendedSchedule.schedule.id,
+      seats: this.reservation.seats,
+    }
+    console.log(data)
+    this.reservationSerevice.create(data)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.submitted = true;
+        },
+        error: (e) => console.error(e)
+      });
+  }
 }

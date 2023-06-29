@@ -14,16 +14,6 @@ public class SeatReserved {
     private Seat seat;
     @ManyToOne
     private Schedule schedule;
-    @ManyToOne
-    private Reservation reservation;
-
-    public Reservation getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
 
     public int getId() {
         return id;
