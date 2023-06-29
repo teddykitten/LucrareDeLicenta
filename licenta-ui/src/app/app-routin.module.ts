@@ -12,10 +12,11 @@ import {HallListComponent} from "./hall-list/hall-list.component";
 import {HallDetailsComponent} from "./hall-details/hall-details.component";
 import {ScheduleAddComponent} from "./schedule-add/schedule-add.component";
 import {ScheduleListComponent} from "./schedule-list/schedule-list.component";
+import {ReservationComponent} from "./reservation/reservation.component";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch: 'full'},
+  {path: '', component: ReservationComponent},
   {path: 'actor', component: ActorListComponent},
   {path: 'actor/:id', component: ActorDetailsComponent},
   {path: 'actor-add', component: ActorAddComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'schedule-add', component: ScheduleAddComponent},
   {path: 'schedule', component: ScheduleListComponent},
   {path: 'schedule/:id', component: ScheduleListComponent}
+  // {path: 'cinema', component: ReservationComponent}
 ];
 
 @NgModule({

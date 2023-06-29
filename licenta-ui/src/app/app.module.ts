@@ -31,6 +31,7 @@ import {ScheduleDetailsComponent} from "./schedule-details/schedule-details.comp
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import { MatNativeDateModule } from '@angular/material/core';
+import {ReservationComponent} from "./reservation/reservation.component";
 
 
 
@@ -50,7 +51,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     HallDetailsComponent,
     ScheduleAddComponent,
     ScheduleListComponent,
-    ScheduleDetailsComponent
+    ScheduleDetailsComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

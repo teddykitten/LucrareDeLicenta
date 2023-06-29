@@ -29,29 +29,6 @@ public class ReservationController {
         }
     }
 
-    @DeleteMapping("/reservation/{id}")
-    public ResponseEntity<HttpStatus> deleteReservation(@PathVariable("id") long id) {
-        try {
-            reservationRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping("/reservation/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
-        Optional<Reservation> reservationData = reservationRepository.findById(id);
-
-        if (reservationData.isPresent()) {
-            Reservation reservation1 = reservationData.get();
-            reservation1.setActive(reservation.isActive());
-            return new ResponseEntity<>(reservationRepository.save(reservation1), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping("/reservation/{id}")
     public ResponseEntity<Reservation> getReservationById(@PathVariable("id") long id) {
         Optional<Reservation> reservationData = reservationRepository.findById(id);

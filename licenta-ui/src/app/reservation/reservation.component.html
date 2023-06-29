@@ -1,0 +1,31 @@
+<div class="list row">
+  <div class>
+  </div>
+  <div class="col-md-6">
+    <h4></h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let schedule of schedules; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveSchedule(schedule, i)"
+      >
+        {{ schedule.movie.name }}
+        {{schedule.date}}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="currentSchedule.id">
+    <div>
+      <h4>{{currentSchedule.hall.rows}}</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let row of currentSchedule.hall.rows; let i = index">
+          Randul {{ i+1 }}:
+          <b *ngFor="let seat of [].constructor(currentSchedule.hall.rows[i].seat); let s = index" >
+            {{s+1}}
+          </b>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

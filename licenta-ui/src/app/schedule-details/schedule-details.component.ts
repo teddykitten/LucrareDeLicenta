@@ -52,19 +52,6 @@ export class ScheduleDetailsComponent implements OnInit {
       });
   }
 
-  updateSchedule(): void {
-    this.message = '';
-
-    this.scheduleService.update(this.currentSchedule.id, this.currentSchedule)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message ? res.message : 'This schedule was updated successfully!';
-        },
-        error: (e) => console.error(e)
-      });
-  }
-
   deleteSchedule(): void {
     this.scheduleService.delete(this.currentSchedule.id)
       .subscribe({
