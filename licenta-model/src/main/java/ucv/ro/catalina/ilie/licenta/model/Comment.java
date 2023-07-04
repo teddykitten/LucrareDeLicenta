@@ -1,9 +1,7 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-
 @Entity
 public class Comment {
     @Id
@@ -14,6 +12,7 @@ public class Comment {
     private String content;
     @ManyToOne
     private Movie movie;
+
     private LocalDateTime postTime;
 
     public int getId() {
