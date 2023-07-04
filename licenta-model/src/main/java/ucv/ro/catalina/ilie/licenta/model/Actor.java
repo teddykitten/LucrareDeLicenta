@@ -1,8 +1,8 @@
 package ucv.ro.catalina.ilie.licenta.model;
 
-import jakarta.persistence.*;
-
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Actor {
