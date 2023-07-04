@@ -16,7 +16,7 @@ public class Movie {
     private String genre;
     private String ageRestricted;
 
-    private Duration duration;
+    private int duration;
     @OneToMany(mappedBy = "movie")
     private Set<MovieActor> actors;
 
@@ -76,11 +76,11 @@ public class Movie {
         this.actors = actors;
     }
 
-    public Duration getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 }

@@ -57,7 +57,7 @@ public class ReservationController {
         }).collect(Collectors.toList()));
         reservation.getSeatReserved().forEach(seatReservedRepository::save);
         reservationRepository.save(reservation);
-        sendSimpleMessage(reservation.getEmail(), "Rezervare confirmata", "Salut, ai rezervat " + seatsReserved.size()
+        sendSimpleMessage(reservation.getEmail(), "Rezervare confirmata", "Salut, ai rezervat " + "\n" + seatsReserved.size()
         + " locuri la filmul " + schedule.getMovie().getName() + " in data de " + schedule.getDate() + " in sala " + schedule.getHall().getName() );
         return new ResponseEntity<>(true, HttpStatus.CREATED);
     }

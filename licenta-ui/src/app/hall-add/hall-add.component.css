@@ -72,6 +72,7 @@
 }
 
 .bn3 {
+  display: inline-block;
   background-color: #13aa52;
   border: 1px solid #13aa52;
   border-radius: 4px;

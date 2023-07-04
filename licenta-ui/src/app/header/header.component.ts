@@ -9,7 +9,6 @@ import {UserService} from "../_service/user.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  // @ts-ignore
   constructor(
     private userAuthService: UserAuthService,
     private router: Router,

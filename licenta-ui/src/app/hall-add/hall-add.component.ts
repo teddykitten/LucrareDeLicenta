@@ -47,7 +47,6 @@ export class HallAddComponent implements OnInit {
     window.history.back();
   }
   onSubmit(): void {
-    console.log(this.rowsForm.value)
     const data = {
       name: this.rowsForm.get("name")?.value,
       rows: this.rowsForm.get("rows")?.value
